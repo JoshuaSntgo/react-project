@@ -24,5 +24,4 @@ function Footer() {
     </div>
   );
 }
-//Testing
 export default Footer;
