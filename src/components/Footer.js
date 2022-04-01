@@ -4,7 +4,7 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 
 function Footer() {
-  return (
+  return ( 
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
@@ -15,7 +15,7 @@ function Footer() {
         <div class='social-media-wrap'>
           <div class='footer-logo'>
             <Link to='/' className='social-logo'>
-              CITI
+              CITIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
               <i class='fab fa-typo3' />
             </Link>
           </div>
