@@ -18,14 +18,6 @@ function Body() {
         >
            Visit CITI
         </Button>
-        <Button
-          className='btns'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
-          onClick={console.log('hey')}
-        >
-         Sign Up 
-        </Button>
       </div>
     </div>
   );
