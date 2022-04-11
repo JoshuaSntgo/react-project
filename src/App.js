@@ -12,10 +12,10 @@ function App() {
         <Switch>
           <Route path='/' exact  component =
           {Home}/>
-   </Switch>
+      </Switch>
       </Router>
     </>
   );
 }
-
+///Change
 export default App;
