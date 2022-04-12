@@ -22,7 +22,8 @@ function App() {
             {Table} />
           <Route path='/admin/usermanagement' exact component=
             {UserManagement} />
-          <Route path='/Sign-Up' exact component={SignUp} />
+          <Route path='/Sign-Up' exact component=
+            {SignUp} />
         </Switch>
       </Router>
     </>
