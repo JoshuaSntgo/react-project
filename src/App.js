@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import './App.css';
 import Home from './components/pages/Home';
 import SignIn from './components/SignIn';
+import SignUp from './Register/Form';
 import Table from './components/Table';
 import UserManagement from './components/UserManagement';
 
@@ -21,7 +22,7 @@ function App() {
             {Table} />
           <Route path='/usermanagement' exact component=
             {UserManagement} />
-
+          <Route path='/Sign-Up' exact component={SignUp}/>
         </Switch>
       </Router>
     </>
