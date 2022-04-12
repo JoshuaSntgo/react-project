@@ -18,11 +18,11 @@ function App() {
             {Home} />
           <Route path='/sign-in' exact component=
             {SignIn} />
-          <Route path='/table' exact component=
+          <Route path='/admin/dashboard' exact component=
             {Table} />
-          <Route path='/usermanagement' exact component=
+          <Route path='/admin/usermanagement' exact component=
             {UserManagement} />
-          <Route path='/Sign-Up' exact component={SignUp}/>
+          <Route path='/Sign-Up' exact component={SignUp} />
         </Switch>
       </Router>
     </>

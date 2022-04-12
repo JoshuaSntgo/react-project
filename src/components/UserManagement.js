@@ -3,6 +3,10 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Typography, Button, CssBaseline } from '@mui/material';
 import Sidebar, { adminMenu } from '../components/Layout/Sidebar';
 import { Box } from '@mui/system';
+import Switch from '@mui/material/Switch';
+
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
 const sampleData = [
     { id: 1, fullname: 'Roland Marco Balagtas', gender: 'Male', position: 'SMP Area Chair' },
     { id: 2, fullname: 'Marlon Bulaong', gender: 'Male', position: 'Faculty' },
@@ -49,13 +53,22 @@ const UserManagement = () => {
                             }
                         },
                         {
+                            field: 'access',
+                            headerName: 'Access',
+                            minWidth: 350,
+                            renderCell: cell => {
+                                return (
+                                    <Switch {...label} />
+                                )
+                            }
+                        },
+                        {
                             field: 'action',
                             headerName: 'Action',
                             minWidth: 350,
                             renderCell: cell => {
                                 return (
                                     <>
-                                        <Button sx={{ mr: 2 }} size="small" variant="contained" >Edit</Button>
                                         <Button size="small" variant="contained" color="warning" >Delete</Button>
                                     </>
                                 )

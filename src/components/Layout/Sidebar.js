@@ -4,6 +4,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Avatar, Divider, Drawer, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import { Box } from '@mui/system';
+
 const drawerWidth = 300;
 
 export const adminMenu = [
@@ -20,7 +21,7 @@ export const adminMenu = [
 ]
 
 const Sidebar = () => {
-    const navigate = useHistory()
+    const { push } = useHistory()
     const { pathname } = useLocation()
     return (
         <Drawer
@@ -40,7 +41,7 @@ const Sidebar = () => {
                 <List>
 
                     {adminMenu.map((item, index) => (
-                        <ListMenuItem item={item} callback={() => navigate(item.link)} key={index} currentRoute={pathname} />
+                        <ListMenuItem item={item} callback={() => push(item.link)} key={index} currentRoute={pathname} />
                     ))}
                     <div style={{ position: 'fixed', bottom: 0, width: drawerWidth }}>
                         <Divider />
