@@ -15,7 +15,7 @@ function Body() {
           buttonStyle='btn--outline'
           buttonSize='btn--large'
         >
-           Visit CITI
+          Visit CITI
         </Button>
       </div>
     </div>
