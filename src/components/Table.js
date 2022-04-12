@@ -69,7 +69,6 @@ const Table = () => {
                             renderCell: cell => {
                                 return (
                                     <>
-                                        <Button sx={{ mr: 2 }} size="small" variant="contained" >Edit</Button>
                                         <Button size="small" variant="contained" color="warning" >Delete</Button>
                                     </>
                                 )
