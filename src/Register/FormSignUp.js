@@ -2,8 +2,41 @@ import React from 'react'
 import useForm from './useForm'
 import validate from './validationInfo';
 import './Form.css';
+import * as Yup from 'yup'
+import {useFormik} from 'formik'
+import { NoiseAwareOutlined } from '@mui/icons-material';
+import {AlertDialog, MenuItem, Snackbar} from '@mui/material'
+import axiosInstance from '../axios/Index';
 
 const FormSignup = ({ submitForm }) => {
+  const [message, setMessage] = React.useState(null)
+  const [success, setSuccess] = React.useState('error')
+  const formik = useFormik({
+    initialValues: {
+      firstName: '', 
+      lastName: '', 
+      email: '',
+      password: '', 
+      confirmPassword: ''
+    }, 
+    validationSchema: Yup.object({
+      firstName: Yup.string().required("First Name is required"), 
+      lastName: Yup.string().required("Last Name is required"), 
+      email: Yup.string().email('Please provide a valid email address').required("Please provide a valid email address"),
+      password: Yup.string().required("A password is required"), 
+      confirmPassword: Yup.string().required('Confirm Password is required').oneOf([Yup.ref("password"), null], 'Passwords must match')
+    }),
+    onSubmit: async (values, {setSubmitting, resetForm}) => {
+      console.log(values)
+      const {data} = await axiosInstance.post('/users', values)
+ 
+      setMessage(data.success ? 'Your account has been created. Please wait for 24-48hours' : data.message)
+ 
+      setSuccess(data.success ? 'success': 'error')
+      setSubmitting()
+      resetForm()
+    }
+  })
     const { handleChange, handleSubmit, values, errors } = useForm(
       submitForm,
       validate
@@ -11,7 +44,10 @@ const FormSignup = ({ submitForm }) => {
   
     return (
       <div className='form-content-right'>
-        <form onSubmit={handleSubmit} className='form' noValidate>
+        {success && (
+          <Snackbar open={Boolean(message)}  onClose={() => setMessage(null)} message={message} />
+        )}
+        <form onSubmit={formik.handleSubmit} className='form' noValidate>
           <h1>
             Get started with us today!
           </h1>
@@ -22,12 +58,12 @@ const FormSignup = ({ submitForm }) => {
               <input
                 className='form-name'
                 type='text'
-                name='firstname'
+                name='firstName'
                 placeholder='First Name'
-                value={values.firstname}
-                onChange={handleChange}
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
               />
-              {errors.firstname && <p>{errors.firstname}</p>}
+              {formik.errors.firstName && <p>{formik.errors.firstName}</p>}
             </div>
 
             <div className='form-inputs'>
@@ -35,12 +71,12 @@ const FormSignup = ({ submitForm }) => {
               <input
                 className='form-name'
                 type='text'
-                name='lastname'
+                name='lastName'
                 placeholder='Last Name'
-                value={values.lastname}
-                onChange={handleChange}
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
               />
-              {errors.lastname && <p>{errors.lastname}</p>}
+              {formik.errors.lastName && <p>{formik.errors.lastName}</p>}
             </div>
           </div>
 
@@ -51,10 +87,10 @@ const FormSignup = ({ submitForm }) => {
               type='email'
               name='email'
               placeholder='juan.delacruz@gmail.com'
-              value={values.email}
-              onChange={handleChange}
+              value={formik.values.email}
+              onChange={formik.handleChange}
             />
-            {errors.email && <p>{errors.email}</p>}
+            {formik.errors.email && <p>{formik.errors.email}</p>}
           </div>
 
           <div className='form-inputs'>
@@ -64,23 +100,23 @@ const FormSignup = ({ submitForm }) => {
               type='password'
               name='password'
               placeholder='Enter your password'
-              value={values.password}
-              onChange={handleChange}
+              value={formik.values.password}
+              onChange={formik.handleChange}
             />
-            {errors.password && <p>{errors.password}</p>}
+            {formik.errors.password && <p>{formik.errors.password}</p>}
           </div>
           <div className='form-inputs'>
             <label className='form-label'>Confirm Password</label>
             <input
               className='form-input'
               type='password'
-              name='password2'
+              name='confirmPassword'
               placeholder='Confirm your password'
-              value={values.password2}
-              onChange={handleChange}
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
             />
-            {errors.password2 && <p>{errors.password2}</p>}
-          </div>
+            {formik.errors.confirmPassword && <p>{formik.errors.confirmPassword}</p>}
+          </div>.
           <button className='form-input-btn' type='submit'>
             Sign up
           </button>
@@ -88,7 +124,7 @@ const FormSignup = ({ submitForm }) => {
             Already have an account? Login <a href='/sign-in'>here</a>
           </span>
         </form>
-      </div>
+      </div> 
     );
   };
   
