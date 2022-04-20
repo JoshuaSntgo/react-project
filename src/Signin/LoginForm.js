@@ -9,6 +9,7 @@ const LoginForm = ({ submitForm }) => {
     validate
   );
 
+//Comment
   return (
     <div className='form-content-right'>
       <form onSubmit={handleSubmit} className='form' noValidate>
