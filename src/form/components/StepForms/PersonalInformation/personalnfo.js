@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Formik, Form, Field, ErrorMessage} from 'formik'
-import '../info.css'
+/* import '../info.css' */
 import * as Yup from 'yup'
 import TextError from '../TextError'
 import { Checkbox, FormControlLabel, MenuItem, Radio, Select } from '@mui/material'
