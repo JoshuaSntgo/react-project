@@ -1,11 +1,16 @@
-import React from 'react'
-import { Formik, Form, Field, ErrorMessage, useField, FieldArray} from 'formik'
+import * as React from 'react';
+import { Formik, Form, Field, ErrorMessage} from 'formik'
 import '../info.css'
 import * as Yup from 'yup'
 import TextError from '../TextError'
 import { Checkbox, FormControlLabel, MenuItem, Radio, Select } from '@mui/material'
-import { values } from 'lodash'
-import { Check } from '@mui/icons-material'
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import 'react-datepicker/dist/react-datepicker.css'
+import TextField from '@mui/material/TextField';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 const initialValues = {
   email:'',
@@ -38,21 +43,16 @@ const initialValues = {
       province:'',
       zip:''
   },
-
-  address2:{
-    house_no2:'',
-    street2:'',
-    subd2:'',
-    baranggay2:'',
-    city2:'',
-    province2:'',
-    zip2:''
-}
+  TelNo:'',
+  MobileNum:'',
+  AltEmail:'',
 }
 
 const onSubmit = values =>{
   console.log("Form Data", values)
 }
+
+
 
 const validationSchema = Yup.object({
   email: Yup.string().email('Invalid Email format').required('Email Required'),
@@ -64,10 +64,12 @@ const validationSchema = Yup.object({
   btype: Yup.string().required('Blood Type is Required'),
   placeBirth: Yup.string().required("Place of birth is Required"),
   gender: Yup.string().required("Gender is Required"),
-  rs_status: Yup.string().required("Relationship status is Required")
+  rs_status: Yup.string().required("Relationship status is Required"),
 })
 
-const personalnfo = () => {
+const Personalnfo = () => {
+
+  const [value, setValue] = React.useState(null);
   return (
   <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
     <Form>
@@ -114,10 +116,22 @@ const personalnfo = () => {
         <Field type="text" id="name_ext" name="name_ext"/>
       </div>
       
-      gagawin datepicker
+/** Kukuhanin value */
       <div className='form-control'>
         <label htmlFor="dateBirth">Date of Birth:</label>
-        <Field type="text" id="dateBirth" name="dateBirth"/>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="mm/dd/yyyy"
+            value={value}
+            id="dateBirth"
+            name="dateBirth"
+            onChange={(newValue) => {
+            setValue(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+          <ErrorMessage name ='dateBirth' component={TextError}/>
       </div>
 
       <div className='form-control'>
@@ -196,6 +210,11 @@ const personalnfo = () => {
         <Field type="text" id="tin" name="tin"/>
       </div>
 
+      <div className='form-control'>
+        <label htmlFor="citizenship">Citizenship:</label>
+        <Field type="text"id="citizenship"name="citizenship"/>
+      </div>
+
 
       <div className='form-control'>
         <label>Resident Address (Some fields are required)</label>
@@ -238,53 +257,32 @@ const personalnfo = () => {
         <Field type="text"id="zip"name="address.zip"/>
       </div>
 
-
       <div className='form-control'>
         <label>Permanent Address (Some fields are required)</label>
-        <Field name="Address" type="check" value="Address" as={Checkbox}/>Same as Resident Address
+        <Field name="Address2" type="check" value="Address2" as={Checkbox}/>Same as Resident Address
+      </div>
+
+      
+      <div className='form-control'>
+        <label htmlFor="TelNo">Telephone No:</label>
+        <Field type="text"id="TelNo"name="TelNo"/>
       </div>
 
       <div className='form-control'>
-        <label htmlFor="address2">Address</label>
-        <label htmlFor="house_no2">House No.:</label>
-        <Field type="text"id="house_no2"name="address2.house_no2"/>
+        <label htmlFor="MobileNum">Mobile No:</label>
+        <Field type="text"id="MobileNum"name="MobileNum"/>
       </div>
 
       <div className='form-control'>
-        <label htmlFor="street2">Street:</label>
-        <Field type="text"id="street2"name="address2.street2"/>
-      </div>
-
-      <div className='form-control'>
-        <label htmlFor="subd2">Subdivision:</label>
-        <Field type="text"id="subd2"name="address2.subd2"/>
-      </div>
-
-      <div className='form-control'>
-        <label htmlFor="baranggay2">Baranggay:</label>
-        <Field type="text"id="baranggay2"name="address2.baranggay2"/>
-        <ErrorMessage name = 'baranggay2' component={TextError}/>
-      </div>
-
-      <div className='form-control'>
-        <label htmlFor="city2">City/Municipality:</label>
-        <Field type="text"id="city2"name="address2.city2"/>
-      </div>
-
-      <div className='form-control'>
-        <label htmlFor="province2">Province:</label>
-        <Field type="text"id="province"name="address2.province2"/>
-      </div>
-
-      <div className='form-control'>
-        <label htmlFor="zip2">ZIP Code:</label>
-        <Field type="text"id="zip2"name="address2.zip2"/>
+        <label htmlFor="AltEmail">Alternate Email Address:</label>
+        <Field type="text"id="AltEmail"name="AltEmail"/>
       </div>
 
       <button type='submit'>Submit</button>
+      
     </Form>
   </Formik>
   )
 }
 
-export default personalnfo
+export default Personalnfo

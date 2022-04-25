@@ -2,12 +2,14 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import './App.css';
-import Home from './form/App';
-//import Home from './components/pages/Home';
+//import Home from './App';
+import Forms from './form/App';
+import Home from './components/pages/Home' ;
 import Login from './Signin/Form';
 import SignUp from './Register/Form';
 import Table from './components/Table';
 import UserManagement from './components/UserManagement';
+
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             {UserManagement} />
           <Route path='/Sign-Up' exact component=
             {SignUp} />
+          <Route path='/forms' exact component=
+            {Forms} />
         </Switch>
       </Router>
     </>
