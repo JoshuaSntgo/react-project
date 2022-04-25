@@ -2,7 +2,7 @@ import StepperControl from './components/StepperControl'
 import Stepper from './components/Stepper'
 import React, { useState } from 'react'
 import '../App.css'
-import PersonalInfo from './components/StepForms/PersonalInformation/Personalnfo'
+import PersonalInfo from './components/StepForms/PersonalInformation/personalnfo'
 import EdBackground from './components/StepForms/EdBackground/EdBackground'
 import { UseContextProvider } from "./components/contexts/StepperContext";
 function App() {
