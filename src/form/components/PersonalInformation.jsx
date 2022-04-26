@@ -442,10 +442,8 @@ function PersonalInformation(props) {
               label="City/​Municipality" 
               placeholder='City/​Municipality' 
               value={values.city} 
-              name="city" 
+              name="address.city" 
               onChange={handleChange} 
-              error={Boolean(errors.city) || touched.city} 
-              helperText={errors.city} 
             />
             <TextField 
               required
