@@ -6,7 +6,17 @@ import * as Yup from 'yup'
 
 const months = [
     "January",
-    "February"
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
 ]
 
 const currentYear = (new Date()).getFullYear();
@@ -59,7 +69,7 @@ function EducationalBackgrounds(props) {
             </div>
             <Box sx={{marginTop: 5}} component="form" onSubmit={handleSubmit}>
                 {values.educs.map((educ, index) => (
-                    <Card key={index} sx={{padding: 2}}>
+                    <Card key={index} sx={{padding: 2, marginBottom:5}}>
                         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                             <div>
                                 <Typography style={{fontWeight: 700, fontSize: 16}}>{educ.schoolName}</Typography>

@@ -11,14 +11,17 @@ function PersonalInformation(props) {
   const {activeStep, handleBack, handleNext, steps} = props
   const initialValues = {
     email: "",
+    password:"",
     dateOfBirth: new Date()
   }
 
   const {values, errors, touched, handleSubmit, handleChange, setFieldValue} = useFormik({
     initialValues,
+
     validationSchema: Yup.object({
       dateOfBirth: Yup.date(),
-      email: Yup.string().email("Please provide a valid email address").required("Email is required")
+      email: Yup.string().email("Please provide a valid email address").required("Email is required"),
+      password: Yup.string().required("Password is Mandatory").min(3, "Password must be at 3 char long"),
     }),
     onSubmit: async (values) => {
       console.log(values)
@@ -31,6 +34,7 @@ function PersonalInformation(props) {
         <Typography style={{fontWeight: 600, fontSize: 18}}>Personal Information</Typography>
         <Typography style={{color: '#b4b4b4', fontSize: 11}}>Please complete the information below. If the field is not applicable, type N/A</Typography>
         <Box sx={{marginTop: 5}} component="form" onSubmit={handleSubmit}>
+          
           <TextField 
             required
             variant="outlined" 
@@ -45,6 +49,7 @@ function PersonalInformation(props) {
             error={Boolean(errors.email) || touched.email} 
             helperText={errors.email} 
           />
+
           <TextField 
             InputProps={{
               readOnly: true
@@ -57,6 +62,7 @@ function PersonalInformation(props) {
             placeholder='Age' 
             value={new Date().getFullYear() - values.dateOfBirth.getFullYear() - 1} 
           />
+
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="mm/dd/yyyy"
@@ -66,6 +72,24 @@ function PersonalInformation(props) {
               renderInput={(params) => <TextField {...params} size="small" fullWidth/>}
             />
           </LocalizationProvider>
+
+          <TextField 
+            required
+            variant="outlined" 
+            type= 'password'
+            style={{marginTop: 20}} 
+            size="small" 
+            fullWidth 
+            label="Password" 
+            placeholder='Password' 
+            value={values.password} 
+            name="password" 
+            onChange={handleChange} 
+            error={Boolean(errors.password) || touched.password} 
+            helperText={errors.password} 
+          />
+
+
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                   color="inherit"
