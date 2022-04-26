@@ -42,6 +42,19 @@ function PersonalInformation(props) {
       province:'',
       zip:''
     },
+
+
+    address2:{
+      house_no2:'',
+      street2:'',
+      subd2:'',
+      baranggay2:'',
+      city2:'',
+      province2:'',
+      zip2:''
+    },
+
+
     TelNo:'',
     MobileNum:'',
     AltEmail:'',
@@ -57,6 +70,13 @@ function PersonalInformation(props) {
       emp_no: Yup.string().required("Employee Number is Mandatory"),
       firstName: Yup.string().required("First Name is Mandatory"),
       lastName: Yup.string().required("Last Name is Mandatory"),
+      middleInitial: Yup.string().required("Last Name is Mandatory"),
+      
+      address: Yup.object().shape({
+        baranggay: Yup.string().required("Barangay is Mandatory"),
+        city: Yup.string().required("City/Municipality is Mandatory"),
+        province: Yup.string().required("Province is Mandatory")
+      }),
     }),
     onSubmit: async (values) => {
       console.log(values)
@@ -295,7 +315,7 @@ function PersonalInformation(props) {
               />
               <TextField 
                 variant="outlined" 
-                style={{marginBottom: 20, width: '50%', marginRight:10}} 
+                style={{marginBottom: 20, width: '50%'}} 
                 size="small" 
                 fullWidth 
                 label="PAG-IBIG ID Number" 
@@ -321,7 +341,7 @@ function PersonalInformation(props) {
               />
               <TextField 
                 variant="outlined" 
-                style={{marginBottom: 20, width: '50%', marginRight:10}} 
+                style={{marginBottom: 20, width: '50%'}} 
                 size="small" 
                 fullWidth 
                 label="SSS Number" 
@@ -348,7 +368,7 @@ function PersonalInformation(props) {
               <TextField 
                 required
                 variant="outlined" 
-                style={{marginBottom: 20, width: '50%', marginRight:10}} 
+                style={{marginBottom: 20, width: '50%'}} 
                 size="small" 
                 fullWidth 
                 label="Citizenship" 
@@ -395,7 +415,7 @@ function PersonalInformation(props) {
                 onChange={handleChange} 
               />
           </Box>
-          <Box sx={{display:'flex', flexDirection:'row'}}>
+          <Box sx={{display:'flex', flexDirection:'row'}} >
             <TextField
               required
               variant="outlined" 
@@ -406,7 +426,7 @@ function PersonalInformation(props) {
               placeholder='Barangay' 
               value={values.address.baranggay} 
               name="address.baranggay" 
-              onChange={handleChange} 
+              onChange={handleChange}
               />
             <TextField 
               required
@@ -416,9 +436,11 @@ function PersonalInformation(props) {
               fullWidth 
               label="City/​Municipality" 
               placeholder='City/​Municipality' 
-              value={values.address.city} 
-              name="address.city" 
+              value={values.city} 
+              name="city" 
               onChange={handleChange} 
+              error={Boolean(errors.city) || touched.city} 
+              helperText={errors.city} 
             />
             <TextField 
               required
@@ -447,8 +469,8 @@ function PersonalInformation(props) {
             />
           </Box>
 
-
           <Typography style={{marginTop: 15, fontWeight: 600, fontSize: 18}}>Permanent Address (Some fields are required)</Typography>
+          
           <Box sx={{marginTop: 2,display:'flex', flexDirection:'row'}}>
             <TextField 
                 variant="outlined" 
@@ -457,8 +479,8 @@ function PersonalInformation(props) {
                 fullWidth 
                 label="House/​Block/​Lot No" 
                 placeholder='House/​Block/​Lot No:' 
-                value={values.address.house_no} 
-                name="address.house_no" 
+                value={values.address2.house_no2} 
+                name="address2.house_no2" 
                 onChange={handleChange} 
               />
               <TextField 
@@ -468,8 +490,8 @@ function PersonalInformation(props) {
                 fullWidth 
                 label="Street" 
                 placeholder='Street' 
-                value={values.address.street} 
-                name="address.street" 
+                value={values.address2.street2} 
+                name="address2.street2" 
                 onChange={handleChange} 
               />
               <TextField 
@@ -479,8 +501,8 @@ function PersonalInformation(props) {
                 fullWidth 
                 label="Subdivision/​Village" 
                 placeholder='Subdivision/​Village' 
-                value={values.address.subd} 
-                name="address.subd" 
+                value={values.address2.subd2} 
+                name="address2.subd2" 
                 onChange={handleChange} 
               />
           </Box>
@@ -493,9 +515,9 @@ function PersonalInformation(props) {
               fullWidth 
               label="Barangay" 
               placeholder='Barangay' 
-              value={values.address.baranggay} 
-              name="address.baranggay" 
-              onChange={handleChange} 
+              value={values.address2.baranggay2} 
+              name="address2.baranggay2" 
+              onChange={handleChange}
               />
             <TextField 
               required
@@ -505,7 +527,7 @@ function PersonalInformation(props) {
               fullWidth 
               label="City/​Municipality" 
               placeholder='City/​Municipality' 
-              value={values.address.city} 
+              value={values.address2.city2} 
               name="address.city" 
               onChange={handleChange} 
             />
@@ -517,8 +539,8 @@ function PersonalInformation(props) {
               fullWidth 
               label="Province" 
               placeholder='Province' 
-              value={values.address.province} 
-              name="address.province" 
+              value={values.address2.province2} 
+              name="address2.province2" 
               onChange={handleChange} 
             />
             
@@ -530,10 +552,49 @@ function PersonalInformation(props) {
               fullWidth 
               label="ZIP Code" 
               placeholder='ZIP Code' 
-              value={values.address.zip} 
-              name="address.zip" 
+              value={values.address2.zip2} 
+              name="address2.zip2" 
               onChange={handleChange} 
             />
+          </Box>
+
+          <Typography style={{marginTop: 15, fontWeight: 600, fontSize: 18}}>Contact Information</Typography>
+          
+          <Box sx={{marginTop: 2,display:'flex', flexDirection:'row'}}>
+            <TextField 
+                variant="outlined" 
+                style={{marginBottom: 20, width: '50%', marginRight:10}} 
+                size="small" 
+                fullWidth 
+                label="Telephone No" 
+                placeholder='Telephone No' 
+                value={values.TelNo} 
+                name="TelNo" 
+                onChange={handleChange} 
+              />
+              <TextField 
+                required
+                variant="outlined" 
+                style={{marginBottom: 20, width: '50%', marginRight:10}} 
+                size="small" 
+                fullWidth 
+                label="Mobile Number" 
+                placeholder='Mobile Number' 
+                value={values.MobileNum} 
+                name="address.street" 
+                onChange={handleChange} 
+              />
+              <TextField 
+                variant="outlined" 
+                style={{marginBottom: 20, width: '50%'}} 
+                size="small" 
+                fullWidth 
+                label="Alternative Email" 
+                placeholder='Alternative Email' 
+                value={values.AltEmail} 
+                name="AltEmail" 
+                onChange={handleChange} 
+              />
           </Box>
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
