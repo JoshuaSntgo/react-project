@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Button, TextField, Typography, Radio, RadioGroup, FormControlLabel, MenuItem, Select} from '@mui/material'
+import {Box, Button, TextField, Typography, Radio, RadioGroup, FormControlLabel, MenuItem, Select, Checkbox} from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useFormik } from 'formik';
@@ -9,6 +9,12 @@ import { width } from '@mui/system';
 
 function PersonalInformation(props) {
 
+  const Civil_Status = [
+    "Single",
+    "In a Relationship",
+    "Married",
+    "Divorced"
+  ]
   const {activeStep, handleBack, handleNext, steps} = props
   const initialValues = {
     email: "",
@@ -22,7 +28,7 @@ function PersonalInformation(props) {
     placeBirth:"",
     gender:"",
     age:"",
-    rs_status:"",
+    civilStatus:"",
     height:"",
     weight:"",
     btype:"",
@@ -245,6 +251,7 @@ function PersonalInformation(props) {
               fullWidth 
               label="Age" 
               placeholder='Age' 
+              name='age'
               value={new Date().getFullYear() - values.dateOfBirth.getFullYear() - 1} 
               />
           </Box>
@@ -257,26 +264,24 @@ function PersonalInformation(props) {
               fullWidth 
               label="Relationship Status gagawin dropdown" 
               placeholder='Relationship Status gagawin dropdown' 
-              value={values.rs_status} 
-              name="rs_status" 
+              value={values.civilStatus} 
+              name="civilStatus" 
               onChange={handleChange} 
             />
 
           <Box sx={{display:'flex', flexDirection:'row'}}>
             <TextField 
-                required
                 variant="outlined" 
                 style={{marginBottom: 20, width: '50%', marginRight:10}} 
                 size="small" 
                 fullWidth 
-                label="Height" 
-                placeholder='Height ' 
+                label="Height(cm)" 
+                placeholder='Height(cm)' 
                 value={values.height} 
                 name="height" 
                 onChange={handleChange} 
               />
               <TextField 
-                required
                 variant="outlined" 
                 style={{marginBottom: 20, width: '50%', marginRight:10}} 
                 size="small" 
@@ -379,7 +384,7 @@ function PersonalInformation(props) {
               />
           </Box>
      
-          <Typography style={{marginTop: 15, fontWeight: 600, fontSize: 18}}>Address (Some fields are required)</Typography> 
+          <Typography style={{marginTop: 15, fontWeight: 600, fontSize: 18}}>Resident Address (Some fields are required)</Typography> 
           <Box sx={{marginTop: 2,display:'flex', flexDirection:'row'}}>
             <TextField 
                 variant="outlined" 
@@ -470,7 +475,9 @@ function PersonalInformation(props) {
           </Box>
 
           <Typography style={{marginTop: 15, fontWeight: 600, fontSize: 18}}>Permanent Address (Some fields are required)</Typography>
-          
+          <FormControlLabel label="Same as Resident Address" control={<Checkbox />}/> //Will get the value from the resident address
+
+
           <Box sx={{marginTop: 2,display:'flex', flexDirection:'row'}}>
             <TextField 
                 variant="outlined" 
@@ -528,7 +535,7 @@ function PersonalInformation(props) {
               label="City/​Municipality" 
               placeholder='City/​Municipality' 
               value={values.address2.city2} 
-              name="address.city" 
+              name="address2.city2" 
               onChange={handleChange} 
             />
             <TextField 
@@ -581,7 +588,7 @@ function PersonalInformation(props) {
                 label="Mobile Number" 
                 placeholder='Mobile Number' 
                 value={values.MobileNum} 
-                name="address.street" 
+                name="MobileNum" 
                 onChange={handleChange} 
               />
               <TextField 
