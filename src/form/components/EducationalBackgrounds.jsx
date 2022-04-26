@@ -109,11 +109,11 @@ const NewEducationForm = ({open, onClose, handleAdd}) => {
         schoolName: "", 
         course: "",
         from : {
-            month: "January", 
+            month: "June", 
             year: "2016"
         },
         to: {
-            month: "January", 
+            month: "June", 
             year: "2016"
         },
         unitsEarned: 0, 
