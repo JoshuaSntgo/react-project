@@ -3,6 +3,7 @@ import {Box, Stepper, Typography, Step, StepLabel, Container, Paper, Button} fro
 import PersonalInformation from './components/PersonalInformation';
 import EducationalBackgrounds from './components/EducationalBackgrounds';
 import CivilService from './components/CivilService';
+import WorkExperience from './components/WorkExperience';
 
 
 const steps = ['Personal Information', 'Educational Background', 'Civil Service Eligibility', 'Work Experience', 'Trainings and Programs',];
@@ -72,6 +73,9 @@ function PersonalDataSheet() {
                     )}
                     {activeStep === 2 && (
                         <CivilService activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} steps={steps} />
+                    )}
+                    {activeStep === 3 && (
+                        <WorkExperience activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} steps={steps} />
                     )}
                 </React.Fragment>
             )}

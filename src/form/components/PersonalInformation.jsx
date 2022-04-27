@@ -239,7 +239,7 @@ function PersonalInformation(props) {
                   <FormControlLabel name="gender" value="male" control={<Radio />} label="Male" />
                   <FormControlLabel name="gender" value="female" control={<Radio />} label="Female" />
                   <FormControlLabel name="gender" value="other" control={<Radio />} label="Other" />
-              </RadioGroup>
+            </RadioGroup>
 
               <TextField 
               InputProps={{
