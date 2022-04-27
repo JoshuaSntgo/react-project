@@ -63,7 +63,7 @@ function EducationalBackgrounds(props) {
             <div style={{display: 'flex', alignItems: "center", justifyContent: 'space-between'}}>
                 <div>
                     <Typography style={{fontWeight: 600, fontSize: 18}}>Educational Background</Typography>
-                    <Typography style={{color: '#b4b4b4', fontSize: 11}}>Please complete the information below. If the field is not applicable, type N/A</Typography>
+                    <Typography style={{color: '#b4b4b4', fontSize: 15}}>Please complete the information below. If the field is not applicable, type N/A</Typography>
                 </div>
                 <Button size="small" color="primary" variant="contained" startIcon={<Add />} onClick={() => setNewForm(true)}>Add Education</Button>
             </div>
