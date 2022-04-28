@@ -4,6 +4,7 @@ import PersonalInformation from './components/PersonalInformation';
 import EducationalBackgrounds from './components/EducationalBackgrounds';
 import CivilService from './components/CivilService';
 import WorkExperience from './components/WorkExperience';
+import TrainingsPrograms from './components/TrainingsPrograms';
 
 
 const steps = ['Personal Information', 'Educational Background', 'Civil Service Eligibility', 'Work Experience', 'Trainings and Programs',];
@@ -76,6 +77,9 @@ function PersonalDataSheet() {
                     )}
                     {activeStep === 3 && (
                         <WorkExperience activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} steps={steps} />
+                    )}
+                    {activeStep === 4 && (
+                        <TrainingsPrograms activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} steps={steps} />
                     )}
                 </React.Fragment>
             )}

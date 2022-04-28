@@ -262,8 +262,8 @@ function PersonalInformation(props) {
               style={{marginBottom: 20, width: '100%'}} 
               size="small" 
               fullWidth 
-              label="Relationship Status gagawin dropdown" 
-              placeholder='Relationship Status gagawin dropdown' 
+              label="Civil Status gagawin dropdown" 
+              placeholder='Civil Status gagawin dropdown' 
               value={values.civilStatus} 
               name="civilStatus" 
               onChange={handleChange} 

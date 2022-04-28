@@ -22,7 +22,7 @@ function WorkExperience(props) {
         validationSchema: Yup.object({
           WorkData: Yup.array().of(
               Yup.object().shape({
-                positionTitle: Yup.string().required("School Name is required"),
+                positionTitle: Yup.string().required("Position Title is required"),
               })
           ),
         }),
@@ -133,7 +133,7 @@ const WorkExperienceForm = ({open, onClose, handleAdd}) => {
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="to"
-                            value={values.InclusiveDate.from}
+                            value={values.InclusiveDate.to}
                             onChange={(n) => setFieldValue("InclusiveDate.to", n)}
                             renderInput={(params) => <TextField {...params} size="small" fullWidth/>}
                         />

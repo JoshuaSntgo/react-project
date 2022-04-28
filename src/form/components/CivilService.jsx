@@ -22,7 +22,7 @@ function CivilService(props) {
         validationSchema: Yup.object({
           CivilData: Yup.array().of(
               Yup.object().shape({
-                civilService: Yup.string().required("School Name is required"),
+                civilService: Yup.string().required("Civil Service is required"),
                 rating: Yup.string().required("rating is required"), 
                 dateOfExamination: Yup.date(),
               })
