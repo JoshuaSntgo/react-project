@@ -30,7 +30,7 @@ const LoginForm = ({ submitForm }) => {
       sessionStorage.setItem('token', data.access_token)
       
       if (data.user.access_level === 1) {
-        push('/faculty')
+        push('/formsnew')
         return window.location.reload()
       } 
       if (data.user.access_level === 2) {
