@@ -7,6 +7,7 @@ import Forms from './form/App';
 import Home from './components/pages/Home' ;
 import Login from './Signin/Form';
 import SignUp from './Register/Form';
+import sidebar from './DashboardFaculty/Sidebar';
 import Table from './components/Table';
 import UserManagement from './components/UserManagement';
 import PersonalDataSheet from './form';
@@ -49,8 +50,8 @@ function App() {
               {UserManagement} />
             <Route path='/Sign-Up' exact component=
               {SignUp} />
-            <Route path='/forms' exact component=
-              {Forms} />
+            <Route path='/DashboardFaculty/Sidebar' exact component=
+              {sidebar} />
             <UserRoute path='/formsnew' exact component=
               {PersonalDataSheet} />
           </Switch>
