@@ -6,9 +6,13 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import { ButtonsComponent } from '..';
 import { width } from '@mui/system';
+import { useDispatch, useSelector } from 'react-redux';
+import { updatePersonalInfo } from '../reducer';
 
 function PersonalInformation(props) {
 
+  const user = useSelector(state => state.userInfo)
+  const dispatch = useDispatch()
   const Civil_Status = [
     "Single",
     "In a Relationship",
@@ -86,6 +90,7 @@ function PersonalInformation(props) {
     }),
     onSubmit: async (values) => {
       console.log(values)
+      dispatch(updatePersonalInfo(values))
       handleNext()
     }
   })
@@ -473,7 +478,13 @@ function PersonalInformation(props) {
           </Box>
 
           <Typography style={{marginTop: 15, fontWeight: 600, fontSize: 18}}>Permanent Address (Some fields are required)</Typography>
-          <FormControlLabel label="Same as Resident Address" control={<Checkbox />}/> //Will get the value from the resident address
+          <FormControlLabel label="Same as Resident Address" control={<Checkbox onChange={({target}) => {
+            if (target.checked) {
+              setFieldValue("address2.house_no2", values.address.house_no)
+            }else{
+              setFieldValue("address2.house_no2", "")
+            }
+          }} />} /> //Will get the value from the resident address
 
 
           <Box sx={{marginTop: 2,display:'flex', flexDirection:'row'}}>

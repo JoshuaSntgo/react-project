@@ -5,12 +5,13 @@ import EducationalBackgrounds from './components/EducationalBackgrounds';
 import CivilService from './components/CivilService';
 import WorkExperience from './components/WorkExperience';
 import TrainingsPrograms from './components/TrainingsPrograms';
+import { useHistory } from 'react-router-dom';
 
 
 const steps = ['Personal Information', 'Educational Background', 'Civil Service Eligibility', 'Work Experience', 'Trainings and Programs',];
 
 function PersonalDataSheet() {
-
+    const history = useHistory()
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
 
@@ -57,11 +58,11 @@ function PersonalDataSheet() {
             {activeStep === steps.length ? (
                 <React.Fragment>
                 <Typography sx={{ mt: 2, mb: 1 }}>
-                    All steps completed - you&apos;re finished
+                    All information completed - Thank you for filling in this Personal Data Sheet
                 </Typography>
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                     <Box sx={{ flex: '1 1 auto' }} />
-                    <Button onClick={handleReset}>Reset</Button>
+                    <Button onClick={() => history.push("/dashboard")}>Proceed to your Dashboard</Button>
                 </Box>
                 </React.Fragment>
             ) : (

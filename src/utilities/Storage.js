@@ -3,7 +3,7 @@ export const saveToStorage = (key, value) => {
   };
   
   export const fetchFromStorage = (key) => {
-    return JSON.parse(sessionStorage.getItem(key));
+    return JSON.parse(sessionStorage.getItem(key)) || sessionStorage.getItem(key);
   };
   
   export const removeFromStorage = (key) => {

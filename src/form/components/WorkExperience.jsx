@@ -5,12 +5,16 @@ import React, { useState } from 'react'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import * as Yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux';
+import { updateWorkXP } from '../reducer';
 
 
 const currentYear = (new Date()).getFullYear();
 const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
 
 function WorkExperience(props) {
+    const user = useSelector(state => state.userInfo)
+    const dispatch = useDispatch()
     const {activeStep, handleBack, handleNext, steps} = props
     const [newForm, setNewForm] = useState(false)
     const initialValues = {
@@ -28,6 +32,7 @@ function WorkExperience(props) {
         }),
         onSubmit: async (values) => {
           console.log(values)
+          dispatch(updateWorkXP(values))
           handleNext()
         }
     })
@@ -91,7 +96,7 @@ const WorkExperienceForm = ({open, onClose, handleAdd}) => {
         monthlySalary: 0,
         salary:0.00,
         statusOfAppointment:"",
-        govtService:""
+        govtService: true
     }
     const {values, handleSubmit, errors, handleChange, touched, setFieldValue}  = useFormik({
         initialValues,
@@ -207,9 +212,9 @@ const WorkExperienceForm = ({open, onClose, handleAdd}) => {
                     <RadioGroup row 
                         aria-labelledby="demo-radio-buttons-group-label"
                         name="gender" 
-                        style={{marginTop: 12, width: '50%'}} >
-                        <FormControlLabel name="govtService" value="Yes" control={<Radio />} label="Yes" />
-                        <FormControlLabel name="govtService" value="No" control={<Radio />} label="No" />
+                        style={{marginTop: 12, width: '50%'}} >.
+                        <FormControlLabel name="govtService" value="Yes" control={<Radio onChange={(e) => setFieldValue("govtService", e.target.checked ? true : false)}  />} label="Yes" />
+                        <FormControlLabel name="govtService" value="No" control={<Radio onChange={(e) => setFieldValue("govtService", e.target.checked ? false : true)}  />} label="No" />
                     </RadioGroup>
                 </Box>
 
