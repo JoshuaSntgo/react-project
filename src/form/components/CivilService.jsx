@@ -5,12 +5,16 @@ import React, { useState } from 'react'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import * as Yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCivilService } from '../reducer';
 
 
 const currentYear = (new Date()).getFullYear();
 const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
 
 function CivilService(props) {
+    const user = useSelector(state => state.userInfo)
+    const dispatch = useDispatch()
     const {activeStep, handleBack, handleNext, steps} = props
     const [newForm, setNewForm] = useState(false)
     const initialValues = {
@@ -30,6 +34,7 @@ function CivilService(props) {
         }),
         onSubmit: async (values) => {
           console.log(values)
+          dispatch(updateCivilService(values))
           handleNext()
         }
     })

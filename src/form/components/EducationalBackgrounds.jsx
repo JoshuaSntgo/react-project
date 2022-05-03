@@ -2,7 +2,9 @@ import { Add, Edit } from '@mui/icons-material'
 import { Box, Button, Card, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
+import { updateEducs } from '../reducer'
 
 const months = [
     "January",
@@ -23,6 +25,8 @@ const currentYear = (new Date()).getFullYear();
 const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
 
 function EducationalBackgrounds(props) {
+    const user = useSelector(state => state.userInfo)
+    const dispatch = useDispatch()
     const {activeStep, handleBack, handleNext, steps} = props
     const [newForm, setNewForm] = useState(false)
     const initialValues = {
@@ -51,6 +55,7 @@ function EducationalBackgrounds(props) {
         }),
         onSubmit: async (values) => {
           console.log(values)
+          dispatch(updateEducs(values))
           handleNext()
         }
     })

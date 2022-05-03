@@ -30,10 +30,12 @@ const LoginForm = ({ submitForm }) => {
       sessionStorage.setItem('token', data.access_token)
       
       if (data.user.access_level === 1) {
-        return push('/faculty')
+        push('/faculty')
+        return window.location.reload()
       } 
       if (data.user.access_level === 2) {
-        return push('/admin')
+        push('/admin/dashboard');
+        return window.location.reload()
       } 
     }
   })
