@@ -27,7 +27,6 @@ function CivilService(props) {
           CivilData: Yup.array().of(
               Yup.object().shape({
                 civilService: Yup.string().required("Civil Service is required"),
-                rating: Yup.string().required("rating is required"), 
                 dateOfExamination: Yup.date(),
               })
           ),
@@ -101,7 +100,6 @@ const CivilServiceForm = ({open, onClose, handleAdd}) => {
         initialValues, 
         validationSchema: Yup.object({
             civilService: Yup.string().required("This field is required"),
-            rating: Yup.string().required("Rating is required"),
             dateOfExamination: Yup.date()
         }),
         onSubmit: (values) => {
@@ -118,9 +116,7 @@ const CivilServiceForm = ({open, onClose, handleAdd}) => {
                     error={Boolean(errors.civilService || touched.civilService)}
                     helperText={errors.civilService} 
                 />
-                <TextField required style={{marginTop: 20}}  fullWidth size="small" label="Rating (if applicable)" placeholder='Rating (if applicable)' value={values.rating} name="rating" onChange={handleChange} 
-                    error={Boolean(errors.rating || touched.rating)}
-                    helperText={errors.rating} 
+                <TextField style={{marginTop: 20}}  fullWidth size="small" label="Rating (if applicable)" placeholder='Rating (if applicable)' value={values.rating} name="rating" onChange={handleChange} 
                 />
                 <Box sx={{marginTop: 3, display: 'flex', flexDirection:'row'}}>
 
@@ -153,7 +149,6 @@ const CivilServiceForm = ({open, onClose, handleAdd}) => {
                 <Box sx={{marginTop: 3, display: 'flex', flexDirection:'row'}}>
 
                     <TextField 
-                        required
                         fullWidth size="small"
                         label="Number"
                         style={{marginRight:5}} 

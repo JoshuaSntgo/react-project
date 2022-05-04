@@ -12,19 +12,9 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 
-
-const sampleData = [
-    { id: 1, fullname: 'Roland Marco Balagtas', gender: 'Male', position: 'SMP Area Chair' },
-    { id: 2, fullname: 'Marlon Bulaong', gender: 'Male', position: 'Faculty' },
-    { id: 3, fullname: 'Liyana Bonifacio', gender: 'Female', position: 'Web and Mobile Area Chair' },
-    { id: 4, fullname: 'Jon Snow', gender: 'Male', position: 'Faculty' },
-    { id: 5, fullname: 'Arya Stark', gender: 'Female', position: 'BA Area Chair' },
-];
-
 const UserManagement = () => {
 
     const [users, setUsers] = useState([])
-
     const [selectedUser, setSelectedUser] = useState(null)
     const getUsers = React.useCallback(async () => {
         const data = await axiosInstance.get("/users")
@@ -98,7 +88,7 @@ const UserDialog = ({open, onClose, user, refresh}) => {
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>User Information</DialogTitle>
-            <DialogContent style={{marginTop: 20}}>
+            <DialogContent style={{marginTop: 5}}>
                 <pre>{JSON.stringify(user, null, 2)}</pre>
             </DialogContent>
             <DialogActions>

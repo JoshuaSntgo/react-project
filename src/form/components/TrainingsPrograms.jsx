@@ -215,11 +215,6 @@ const TrainingsProgramsForm = ({open, onClose, handleAdd}) => {
                 onChange={handleChange}
             />
 
-
-            <Typography style={{marginTop: 20, fontWeight: 600, fontSize: 18}}>Certificate (Upload Certificate whether in image or pdf file</Typography>
-            //Papaturo kay sir
-
-
             </DialogContent>
 
 

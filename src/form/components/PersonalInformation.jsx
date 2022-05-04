@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Button, TextField, Typography, Radio, RadioGroup, FormControlLabel, MenuItem, Select, Checkbox} from '@mui/material'
+import {Box, Button, TextField, Typography, Radio, RadioGroup, FormControlLabel, MenuItem, Select, Checkbox, InputLabel, FormControl } from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useFormik } from 'formik';
@@ -19,7 +19,9 @@ function PersonalInformation(props) {
     "Married",
     "Divorced"
   ]
+
   const {activeStep, handleBack, handleNext, steps} = props
+  
   const initialValues = {
     email: "",
     password:"",
@@ -70,6 +72,10 @@ function PersonalInformation(props) {
     AltEmail:'',
   }
 
+  
+  const [civilStatus, setcivilStatus] = React.useState('');
+  const [btype, setbtype] = React.useState('');
+
   const {values, errors, touched, handleSubmit, handleChange, setFieldValue} = useFormik({
     initialValues,
 
@@ -88,11 +94,13 @@ function PersonalInformation(props) {
         province: Yup.string().required("Province is Mandatory")
       }),
     }),
+
     onSubmit: async (values) => {
       console.log(values)
       dispatch(updatePersonalInfo(values))
       handleNext()
-    }
+    },
+
   })
   
   return (
@@ -241,9 +249,9 @@ function PersonalInformation(props) {
                 aria-labelledby="demo-radio-buttons-group-label"
                 name="gender" 
                 style={{marginBottom: 20, width: '40%', marginRight:20}} >
-                  <FormControlLabel name="gender" value="male" control={<Radio />} label="Male" />
-                  <FormControlLabel name="gender" value="female" control={<Radio />} label="Female" />
-                  <FormControlLabel name="gender" value="other" control={<Radio />} label="Other" />
+                  <FormControlLabel name="gender" value="male" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? true : true)}  />} label="Male" />
+                  <FormControlLabel name="gender" value="female" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? false : true)}  />} label="Female" />
+                  <FormControlLabel name="gender" value="other" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? false : true)}  />} label="Other" />
             </RadioGroup>
 
               <TextField 
@@ -260,19 +268,23 @@ function PersonalInformation(props) {
               value={new Date().getFullYear() - values.dateOfBirth.getFullYear() - 1} 
               />
           </Box>
-
-          <TextField 
-              required
-              variant="outlined" 
-              style={{marginBottom: 20, width: '100%'}} 
-              size="small" 
-              fullWidth 
-              label="Civil Status gagawin dropdown" 
-              placeholder='Civil Status gagawin dropdown' 
-              value={values.civilStatus} 
-              name="civilStatus" 
-              onChange={handleChange} 
-            />
+          <Box sx={{marginBottom: 3, width: '100%'}}>
+            <FormControl fullWidth>
+              <InputLabel id="civilStatus">Civil Status //aaysin mamaya</InputLabel>
+              <Select
+                labelId="civilStatus"
+                id="civilStatus"
+                value={civilStatus}
+                label="Civil Status"
+                onChange={handleChange}
+              >
+                <MenuItem value={'Single'}>Single</MenuItem>
+                <MenuItem value={'In a Relationship'}>In a Relationship</MenuItem>
+                <MenuItem value={'Married'}>Married</MenuItem>
+                <MenuItem value={'Divorced'}>Divorced</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
 
           <Box sx={{display:'flex', flexDirection:'row'}}>
             <TextField 
@@ -297,18 +309,27 @@ function PersonalInformation(props) {
                 name="weight" 
                 onChange={handleChange} 
               />
-              <TextField 
-                required
-                variant="outlined" 
-                style={{marginBottom: 20, width: '50%'}} 
-                size="small" 
-                fullWidth 
-                label="Blood Type" 
-                placeholder='Blood Type' 
-                value={values.btype} 
-                name="btype" 
-                onChange={handleChange} 
-              />
+              <FormControl sx={{marginBottom: 3, width: '50%'}}>
+                <InputLabel id="btype" style={{marginTop:-7}}>Blood Type</InputLabel>
+                <Select
+                  required
+                  labelId="btype"
+                  id="btype"
+                  value={btype}
+                  label="Blood Type"
+                  size="small" 
+                  onChange={handleChange}
+                >
+                  <MenuItem value={'A+'}>A+</MenuItem>
+                  <MenuItem value={'A-'}>A-</MenuItem>
+                  <MenuItem value={'B+'}>B+</MenuItem>
+                  <MenuItem value={'B-'}>B-</MenuItem>
+                  <MenuItem value={'AB+'}>AB+</MenuItem>
+                  <MenuItem value={'AB-'}>AB-</MenuItem>
+                  <MenuItem value={'O+'}>O+</MenuItem>
+                  <MenuItem value={'O-'}>O-</MenuItem>
+                </Select>
+              </FormControl>
           </Box>
 
           <Box sx={{display:'flex', flexDirection:'row'}}>
@@ -481,10 +502,22 @@ function PersonalInformation(props) {
           <FormControlLabel label="Same as Resident Address" control={<Checkbox onChange={({target}) => {
             if (target.checked) {
               setFieldValue("address2.house_no2", values.address.house_no)
+              setFieldValue("address2.street2", values.address.street)
+              setFieldValue("address2.subd2", values.address.subd)
+              setFieldValue("address2.baranggay2", values.address.baranggay)
+              setFieldValue("address2.city2", values.address.city)
+              setFieldValue("address2.province2", values.address.province)
+              setFieldValue("address2.zip2", values.address.zip)
             }else{
               setFieldValue("address2.house_no2", "")
+              setFieldValue("address2.street2", "")
+              setFieldValue("address2.subd2", "")
+              setFieldValue("address2.baranggay2", "")
+              setFieldValue("address2.city2", "")
+              setFieldValue("address2.province2", "")
+              setFieldValue("address2.zip2", "")
             }
-          }} />} /> //Will get the value from the resident address
+          }} />} />
 
 
           <Box sx={{marginTop: 2,display:'flex', flexDirection:'row'}}>

@@ -55,7 +55,7 @@ function WorkExperience(props) {
                         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                             <div>
                                 <Typography style={{fontWeight: 700, fontSize: 16}}>{work_data.positionTitle}</Typography>
-                                <Typography style={{fontSize: 14, color: '#b4b4b4'}}>{work_data.department}</Typography>
+                                <Typography style={{fontSize: 14, color: '#b4b4b4'}}>{work_data.company}</Typography>
                             </div>
                             <IconButton onClick={() => console.log(work_data)}><Edit /></IconButton>
                         </div>
@@ -92,7 +92,7 @@ const WorkExperienceForm = ({open, onClose, handleAdd}) => {
             to: new Date(),
         },
         positionTitle:"",
-        department:"",
+        company:"",
         monthlySalary: 0,
         salary:0.00,
         statusOfAppointment:"",
@@ -107,10 +107,10 @@ const WorkExperienceForm = ({open, onClose, handleAdd}) => {
                 to: Yup.date()
             }),
             positionTitle: Yup.string().required("Position Title is required"),
-            department: Yup.string().required("Department Field is required"),
+            company: Yup.string().required("Company Name Field is required"),
             monthlySalary: Yup.number().required(),
             salary: Yup.number().required(),
-            statusOfAppointment: Yup.string().required("Department Field is required"),
+            statusOfAppointment: Yup.string().required("Status of Appointment Field is required"),
         }),
         onSubmit: (values) => {
             console.log(values)
@@ -160,11 +160,11 @@ const WorkExperienceForm = ({open, onClose, handleAdd}) => {
                 <TextField 
                         required
                         fullWidth size="small"
-                        label="Department"
-                        placeholder='Department'
+                        label="Company"
+                        placeholder='Company'
                         style={{marginTop:20}}
-                        value={values.department}
-                        name="department"
+                        value={values.company}
+                        name="company"
                         onChange={handleChange} 
                 />
 
@@ -211,7 +211,7 @@ const WorkExperienceForm = ({open, onClose, handleAdd}) => {
                     <Typography style={{fontSize: 18, marginTop: 20, marginRight: 10}}>Gov't service (y/​ n): </Typography>
                     <RadioGroup row 
                         aria-labelledby="demo-radio-buttons-group-label"
-                        name="gender" 
+                        name="govtService" 
                         style={{marginTop: 12, width: '50%'}} >.
                         <FormControlLabel name="govtService" value="Yes" control={<Radio onChange={(e) => setFieldValue("govtService", e.target.checked ? true : false)}  />} label="Yes" />
                         <FormControlLabel name="govtService" value="No" control={<Radio onChange={(e) => setFieldValue("govtService", e.target.checked ? false : true)}  />} label="No" />
