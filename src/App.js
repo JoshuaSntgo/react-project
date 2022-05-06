@@ -4,17 +4,21 @@ import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import './App.css';
 //import Home from './App';
 import Forms from './form/App';
-import Home from './components/pages/Home' ;
+import Home from './components/pages/Home';
 import Login from './Signin/Form';
 import SignUp from './Register/Form';
-import Fdashboard from './Faculty/Dashboard';
+import FTNP from './Faculty/TNP';
 import Table from './components/Table';
 import UserManagement from './components/UserManagement';
 import PersonalDataSheet from './form';
 import { createTheme, ThemeProvider } from '@mui/material';
-import {Provider} from 'react-redux'
-import {store} from './store/index'
+import { Provider } from 'react-redux'
+import { store } from './store/index'
 import { AdminRoute, AppRoute, UserRoute } from './utilities/Routes';
+import Fpersonalinfo from './Faculty/PersonalInfo';
+import Feducational from './Faculty/Educational';
+import FCSE from './Faculty/CSE';
+import FWorkExp from './Faculty/WorkExp';
 
 const theme = createTheme({
   typography: {
@@ -50,8 +54,16 @@ function App() {
               {UserManagement} />
             <Route path='/Sign-Up' exact component=
               {SignUp} />
-            <Route path='/Faculty/Dashboard' exact component=
-              {Fdashboard} />
+            <Route path='/Faculty/PersonalInfo' exact component=
+              {Fpersonalinfo} />
+            <Route path='/Faculty/Educational' exact component=
+              {Feducational} />
+            <Route path='/Faculty/CSE' exact component=
+              {FCSE} />
+            <Route path='/Faculty/WorkExp' exact component=
+              {FWorkExp} />
+            <Route path='/Faculty/TNP' exact component=
+              {FTNP} />
             <UserRoute path='/formsnew' exact component=
               {PersonalDataSheet} />
           </Switch>
