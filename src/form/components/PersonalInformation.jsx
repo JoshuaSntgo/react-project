@@ -33,8 +33,8 @@ function PersonalInformation(props) {
     dateOfBirth: new Date(),
     placeBirth: "",
     gender: "",
-    age: "",
-    civilStatus: "",
+    age: 0,
+    civilStatus: "Single",
     height: "",
     weight: "",
     btype: "",
@@ -105,6 +105,7 @@ function PersonalInformation(props) {
     }),
 
     onSubmit: async (values) => {
+      setFieldValue("age", parseInt(new Date().getFullYear() - values.dateOfBirth.getFullYear() - 1))
       console.log(values)
       dispatch(updatePersonalInfo(values))
       handleNext()
@@ -231,7 +232,10 @@ function PersonalInformation(props) {
               label="Date of Birth"
               value={values.dateOfBirth}
               name="dateOfBirth"
-              onChange={(n) => setFieldValue("dateOfBirth", n)}
+              onChange={(n) => {
+                setFieldValue("dateOfBirth", n);
+                setFieldValue("age", parseInt(new Date().getFullYear() - n.getFullYear() - 1))
+              }}
               renderInput={(params) => <TextField {...params} size="small" fullWidth />}
             />
           </LocalizationProvider>
@@ -258,9 +262,9 @@ function PersonalInformation(props) {
             aria-labelledby="demo-radio-buttons-group-label"
             name="gender"
             style={{ marginBottom: 20, width: '40%', marginRight: 20 }} >
-            <FormControlLabel name="gender" value="male" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? true : true)} />} label="Male" />
-            <FormControlLabel name="gender" value="female" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? false : true)} />} label="Female" />
-            <FormControlLabel name="gender" value="other" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? false : true)} />} label="Other" />
+            <FormControlLabel name="gender" value="male" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Male" : "")} />} label="Male" />
+            <FormControlLabel name="gender" value="female" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Femail" : "")} />} label="Female" />
+            <FormControlLabel name="gender" value="other" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Other" : "")} />} label="Other" />
           </RadioGroup>
 
           <TextField
@@ -283,9 +287,9 @@ function PersonalInformation(props) {
             <Select
               labelId="civilStatus"
               id="civilStatus"
-              value={civilStatus}
+              value={values.civilStatus}
               label="Civil Status"
-              onChange={handleChangeCivilStatus}
+              onChange={(e) => setFieldValue("civilStatus", e.target.value)}
             >
               <MenuItem value={'Single'}>Single</MenuItem>
               <MenuItem value={'In a Relationship'}>In a Relationship</MenuItem>
