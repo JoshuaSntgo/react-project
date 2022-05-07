@@ -1,6 +1,11 @@
 import React from 'react'
 import HomeIcon from '@mui/icons-material/Home';
+import SchoolIcon from '@mui/icons-material/School';
+import BadgeIcon from '@mui/icons-material/Badge';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import WorkIcon from '@mui/icons-material/Work';
 import GroupsIcon from '@mui/icons-material/Groups';
+import PersonIcon from '@mui/icons-material/Person';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Avatar, Divider, Drawer, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import { Box } from '@mui/system';
@@ -10,27 +15,32 @@ const drawerWidth = 300;
 export const facultyMenu = [
     {
         name: 'Personal Information',
-        icon: <HomeIcon />,
+        icon: <PersonIcon />,
+        link: '/Faculty/PersonalInfo'
+    },
+    {
+        name: 'Personal Information',
+        icon: <PersonIcon />,
         link: '/Faculty/PersonalInfo'
     },
     {
         name: 'Educational Background',
-        icon: <HomeIcon />,
+        icon: <SchoolIcon />,
         link: '/Faculty/Educational'
     },
     {
         name: 'Civil Service Eligibility',
-        icon: <HomeIcon />,
+        icon: <BadgeIcon />,
         link: '/Faculty/CSE'
     },
     {
         name: 'Work Experience',
-        icon: <HomeIcon />,
+        icon: <WorkIcon />,
         link: '/Faculty/WorkExp'
     },
     {
         name: 'Trainings and Programs',
-        icon: <HomeIcon />,
+        icon: <WorkspacePremiumIcon />,
         link: '/Faculty/TNP'
     }
 ]

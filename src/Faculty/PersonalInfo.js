@@ -77,6 +77,14 @@ const PersonalInfo = (props) => {
     const [civilStatus, setcivilStatus] = React.useState('');
     const [btype, setbtype] = React.useState('');
 
+    const handleChangeCivilStatus = (event) => {
+        setcivilStatus(event.target.value)
+    }
+
+    const handleChangeBType = (event) => {
+        setbtype(event.target.value)
+    }
+
     const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
         initialValues,
 
@@ -271,13 +279,13 @@ const PersonalInfo = (props) => {
                 </Box>
                 <Box sx={{ marginBottom: 3, width: '100%' }}>
                     <FormControl fullWidth>
-                        <InputLabel id="civilStatus">Civil Status //aaysin mamaya</InputLabel>
+                        <InputLabel id="civilStatus">Civil Status</InputLabel>
                         <Select
                             labelId="civilStatus"
                             id="civilStatus"
                             value={civilStatus}
                             label="Civil Status"
-                            onChange={handleChange}
+                            onChange={handleChangeCivilStatus}
                         >
                             <MenuItem value={'Single'}>Single</MenuItem>
                             <MenuItem value={'In a Relationship'}>In a Relationship</MenuItem>
@@ -319,7 +327,7 @@ const PersonalInfo = (props) => {
                             value={btype}
                             label="Blood Type"
                             size="small"
-                            onChange={handleChange}
+                            onChange={handleChangeBType}
                         >
                             <MenuItem value={'A+'}>A+</MenuItem>
                             <MenuItem value={'A-'}>A-</MenuItem>
@@ -645,21 +653,6 @@ const PersonalInfo = (props) => {
                         name="AltEmail"
                         onChange={handleChange}
                     />
-                </Box>
-
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                    <Button
-                        color="inherit"
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        sx={{ mr: 1 }}
-                    >
-                        Back
-                    </Button>
-                    <Box sx={{ flex: '1 1 auto' }} />
-                    <Button type="submit">
-                        Next
-                    </Button>
                 </Box>
 
             </Box>

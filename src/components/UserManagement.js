@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { Typography, Button, CssBaseline, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Typography, Button, CssBaseline, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Grid, Stack, FormControl } from '@mui/material';
 import Sidebar, { adminMenu } from '../components/Layout/Sidebar';
 import { Box } from '@mui/system';
 import Switch from '@mui/material/Switch';
 import axiosInstance from '../axios/Index';
+
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-community/dist/styles/ag-grid.css';
@@ -43,7 +44,7 @@ const UserManagement = () => {
                         rowSelection={"multiple"}
                         defaultColDef={{ resizable: true, floatingFilter: true }}
                         rowData={users}
-                        onRowClicked={({data}) => setSelectedUser(data)}
+                        onRowClicked={({ data }) => setSelectedUser(data)}
                     >
                         <AgGridColumn
                             headerName="Name"
@@ -51,7 +52,7 @@ const UserManagement = () => {
                             field="firstName"
                             sortable={true}
                             filter={true}
-                            valueGetter={({data}) => data.firstName.toUpperCase() + " " + data.lastName.toUpperCase() }
+                            valueGetter={({ data }) => data.firstName.toUpperCase() + " " + data.lastName.toUpperCase()}
                         />
                         <AgGridColumn
                             headerName="Email"
@@ -65,11 +66,11 @@ const UserManagement = () => {
                             width={150}
                             field="isConfirmed"
                             sortable={true}
-                            filter={true} 
+                            filter={true}
                             valueGetter={(v) => v.data.isConfirmed ? "Approved" : "Pending"}
                         />
                     </AgGridReact>
-                </div>                
+                </div>
             </Box>
         </Box>
     )
@@ -77,25 +78,66 @@ const UserManagement = () => {
 
 export default UserManagement
 
-const UserDialog = ({open, onClose, user, refresh}) => {
+const UserDialog = ({ open, onClose, user, refresh }) => {
+
 
     const handleApprove = async () => {
-        const {data} = await axiosInstance.put(`/users/${user._id}`, {isConfirmed: true})
+        const { data } = await axiosInstance.put(`/users/${user._id}`, { isConfirmed: true })
         console.log(data)
         refresh()
         onClose()
     }
     return (
-        <Dialog open={open} onClose={onClose}>
+
+        <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
             <DialogTitle>User Information</DialogTitle>
-            <DialogContent style={{marginTop: 5}}>
-                <pre>{JSON.stringify(user, null, 2)}</pre>
-            </DialogContent>
+            <Grid xs={12} sx={{ mb: 2, p: 2 }}>
+                <Stack direction="row" spacing={2}>
+                    <TextField
+
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        label="First Name"
+                        placeholder='Name'
+                        value="sample"
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                    />
+
+                    <TextField
+
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        label="Last Name"
+                        placeholder='Last Name'
+                        value="sample"
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                    />
+                </Stack>
+            </Grid>
+            <Grid xs={12} sx={{ p: 2 }}>
+                <TextField
+
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                    label="Email"
+                    placeholder='Email'
+                    value="sample"
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                />
+            </Grid>
+
             <DialogActions>
                 <Button variant='outlined' onClick={onClose}>Close</Button>
-                <Button variant="contained" onClick={onClose}>Update</Button>
                 <Button variant="contained" color="warning" disabled={user.isConfirmed} onClick={handleApprove}>Approve</Button>
-                
             </DialogActions>
         </Dialog>
     )

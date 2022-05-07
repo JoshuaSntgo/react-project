@@ -279,7 +279,7 @@ function PersonalInformation(props) {
         </Box>
         <Box sx={{ marginBottom: 3, width: '100%' }}>
           <FormControl fullWidth>
-            <InputLabel id="civilStatus">Civil Status //aaysin mamaya</InputLabel>
+            <InputLabel id="civilStatus">Civil Status</InputLabel>
             <Select
               labelId="civilStatus"
               id="civilStatus"
