@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar, { facultyMenu } from '../components/Layout/Sidebar'
 import { Box, Button, TextField, Typography, Radio, RadioGroup, FormControlLabel, MenuItem, Select, Checkbox, InputLabel, FormControl } from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
@@ -9,10 +9,28 @@ import { ButtonsComponent } from '..';
 import { width } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePersonalInfo } from '../form/reducer';
+import axiosInstance from '../axios/Index';
+import { fetchFromStorage } from '../utilities/Storage';
 
 const PersonalInfo = (props) => {
 
-    const user = useSelector(state => state.userInfo)
+    /* Code for getting user information */
+    const user = fetchFromStorage('user')
+    const [selectedUser, setSelectedUser] = useState(null)
+
+    const getUser = React.useCallback(async () => {
+        const {data} = await axiosInstance.get(`/users/${user._id}`)
+        setSelectedUser(data.user)
+    }, [])
+
+    useEffect(() => {
+        getUser()
+    }, [getUser])
+
+    /* End Code for getting user information */
+
+
+    const userInfo = useSelector(state => state.userInfo)
     const dispatch = useDispatch()
     const Civil_Status = [
         "Single",
@@ -117,6 +135,7 @@ const PersonalInfo = (props) => {
             <Sidebar />
             <Typography variant='h6'>Personal Information</Typography>
 
+            <pre>{JSON.stringify(selectedUser, null, 4)}</pre>
             <Box sx={{ marginTop: 2 }} component="form" onSubmit={handleSubmit}>
 
                 <TextField sx={{ mt: 5 }}

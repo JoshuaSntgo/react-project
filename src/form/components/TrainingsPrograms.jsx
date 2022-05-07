@@ -7,13 +7,16 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTrainings } from '../reducer';
+import axiosInstance from '../../axios/Index';
+import { fetchFromStorage } from '../../utilities/Storage';
 
 
 const currentYear = (new Date()).getFullYear();
 const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
 
 function TrainingsPrograms(props) {
-    const user = useSelector(state => state.userInfo)
+    const user = fetchFromStorage('user')
+    const userInfo = useSelector(state => state.userInfo)
     const dispatch = useDispatch()
     const {activeStep, handleBack, handleNext, steps} = props
     const [newForm, setNewForm] = useState(false)
@@ -21,6 +24,7 @@ function TrainingsPrograms(props) {
         TrainingData : []
     }
 
+    console.log(user)
     const {values, errors, touched, handleSubmit, handleChange, setFieldValue} = useFormik({
         initialValues,
         validationSchema: Yup.object({
@@ -41,8 +45,13 @@ function TrainingsPrograms(props) {
           console.log(values)
           dispatch(updateTrainings(values))
 
-          console.log(user)
-          handleNext()
+          const {data} = await axiosInstance.put(`/users/${user._id}`, {
+              userInfo,
+          })
+          console.log(data)
+          if (data.success) {
+            handleNext()
+          }
         }
     })
     const handleAdd = (data) => {

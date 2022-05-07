@@ -87,6 +87,12 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
         refresh()
         onClose()
     }
+    const handleDisapprove = async () => {
+        const { data } = await axiosInstance.put(`/users/${user._id}`, { isConfirmed: false })
+        console.log(data)
+        refresh()
+        onClose()
+    }
     return (
 
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -100,7 +106,7 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
                         fullWidth
                         label="First Name"
                         placeholder='Name'
-                        value="sample"
+                        value={user.firstName}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -113,7 +119,7 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
                         fullWidth
                         label="Last Name"
                         placeholder='Last Name'
-                        value="sample"
+                        value={user.lastName}
                         InputProps={{
                             readOnly: true,
                         }}
@@ -128,7 +134,7 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
                     fullWidth
                     label="Email"
                     placeholder='Email'
-                    value="sample"
+                    value={user.email}
                     InputProps={{
                         readOnly: true,
                     }}
@@ -137,7 +143,11 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
 
             <DialogActions>
                 <Button variant='outlined' onClick={onClose}>Close</Button>
-                <Button variant="contained" color="warning" disabled={user.isConfirmed} onClick={handleApprove}>Approve</Button>
+                {user.isConfirmed 
+                    ? <Button variant="contained" color="warning" onClick={handleDisapprove}>Remove Access</Button>
+                    : <Button variant="contained" color="warning" disabled={user.isConfirmed} onClick={handleApprove}>Approve</Button>
+
+                }
             </DialogActions>
         </Dialog>
     )
