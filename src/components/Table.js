@@ -35,8 +35,7 @@ const Table = () => {
 
     const [selectedFilter, setSelectedFilter] = useState(true)
     return (
-
-        <>
+    <>
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <Sidebar />
@@ -91,46 +90,45 @@ const Table = () => {
                         </CardActions>
                     </Card>
                 </Grid>
+
+                <Grid xs={12} sm={5}>
+                    <div className="ag-theme-alpine" style={{ height: 600, width: '100%', marginTop: 20, marginLeft: 25}}>
+                        <AgGridReact
+                        pagination={true}
+                        paginationPageSize={10}
+                        animateRows={true}
+                        rowSelection={"multiple"}
+                        defaultColDef={{ resizable: true, floatingFilter: true }}
+                        rowData={users.filter(a => a.isConfirmed === selectedFilter)}
+                        /* onRowClicked={({ data }) => setSelectedUser(data)} */>
+                            <AgGridColumn
+                            headerName="Name"
+                            width={150}
+                            field="firstName"
+                            sortable={true}
+                            filter={true}
+                            valueGetter={({ data }) => data.firstName.toUpperCase() + " " + data.lastName.toUpperCase()}/>
+
+                            <AgGridColumn
+                            headerName="Email"
+                            field="email"
+                            flex="1"
+                            sortable={true}
+                            filter={true}/>
+
+                            <AgGridColumn
+                            headerName="Status"
+                            width={150}
+                            field="isConfirmed"
+                            sortable={true}
+                            filter={true}
+                            valueGetter={(v) => v.data.isConfirmed ? "Approved" : "Pending"}/>
+                            
+                        </AgGridReact>
+                    </div>
+                </Grid>
             </Grid>
-
         </Box>
-
-        <div className="ag-theme-alpine" style={{ height: 600, width: '100%', marginTop: 20 }}>
-            <AgGridReact
-                pagination={true}
-                paginationPageSize={10}
-                animateRows={true}
-                rowSelection={"multiple"}
-                defaultColDef={{ resizable: true, floatingFilter: true }}
-                rowData={users.filter(a => a.isConfirmed === selectedFilter)}
-                /* onRowClicked={({ data }) => setSelectedUser(data)} */
-            >
-                <AgGridColumn
-                    headerName="Name"
-                    width={150}
-                    field="firstName"
-                    sortable={true}
-                    filter={true}
-                    valueGetter={({ data }) => data.firstName.toUpperCase() + " " + data.lastName.toUpperCase()}
-                />
-                <AgGridColumn
-                    headerName="Email"
-                    field="email"
-                    flex="1"
-                    sortable={true}
-                    filter={true}
-                />
-                <AgGridColumn
-                    headerName="Status"
-                    width={150}
-                    field="isConfirmed"
-                    sortable={true}
-                    filter={true}
-                    valueGetter={(v) => v.data.isConfirmed ? "Approved" : "Pending"}
-                />
-            </AgGridReact>
-        </div>
-
         </>
     )
 }
