@@ -1,20 +1,31 @@
 import { Add, Edit } from '@mui/icons-material'
 import { Box, Button, Card, Dialog, DialogActions, DialogContent, DialogTitle, Radio, RadioGroup, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateWorkXP } from '../form/reducer';
 import Sidebar, { facultyMenu } from '../components/Layout/Sidebar'
+import axiosInstance from '../axios/Index';
+import { fetchFromStorage } from '../utilities/Storage';
 
+function WorkExp(props) {/* Code for getting user information */
+    const user = fetchFromStorage('user')
+    const [selectedUser, setSelectedUser] = useState(null)
 
-const currentYear = (new Date()).getFullYear();
-const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + (i * step));
+    const getUser = React.useCallback(async () => {
+        const { data } = await axiosInstance.get(`/users/${user._id}`)
+        setSelectedUser(data.user)
+    }, [])
 
-function WorkExp(props) {
-    const user = useSelector(state => state.userInfo)
+    useEffect(() => {
+        getUser()
+    }, [getUser])
+
+    /* End Code for getting user information */
+    const userInfo = useSelector(state => state.userInfo)
     const dispatch = useDispatch()
     const { activeStep, handleBack, handleNext, steps } = props
     const [newForm, setNewForm] = useState(false)
@@ -44,38 +55,22 @@ function WorkExp(props) {
     return (
         <Box sx={{ padding: 5, display: 'flex' }}>
             <Sidebar />
-            <div style={{ display: 'flex', alignItems: "center", justifyContent: 'space-between' }}>
-                <div>
-                    <Typography variant='h6'>Work Experience</Typography>
-                </div>
-            </div>
-            <Box sx={{ marginTop: 5 }} component="form" onSubmit={handleSubmit}>
-                {values.WorkData.map((work_data, index) => (
-                    <Card key={index} sx={{ padding: 2, marginBottom: 5 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <div>
-                                <Typography style={{ fontWeight: 700, fontSize: 16 }}>{work_data.positionTitle}</Typography>
-                                <Typography style={{ fontSize: 14, color: '#b4b4b4' }}>{work_data.company}</Typography>
-                            </div>
-                            <IconButton onClick={() => console.log(work_data)}><Edit /></IconButton>
-                        </div>
+            <Typography variant='h6'>Personal Information</Typography>
 
-                    </Card>
-                ))}
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                    {/* <Button
-                        color="inherit"
-                        disabled={activeStep === 0}
-                        onClick={handleBack}
-                        sx={{ mr: 1 }}
-                    >
-                        Back
-                    </Button>
-                    <Box sx={{ flex: '1 1 auto' }} />
-                    <Button type="submit">
-                        Next
-                    </Button> */}
-                </Box>
+            <pre>{JSON.stringify(selectedUser, null, 4)}</pre>
+            <Box sx={{ marginTop: 2 }} component="form" >
+
+                <TextField sx={{ mt: 5 }}
+                    required
+                    variant="outlined"
+                    style={{ marginBottom: 20 }}
+                    size="small"
+                    fullWidth
+                    label="Company"
+                    placeholder='Company'
+                    value={user.userInfo.workexp.WorkData.company}
+                    name="email"
+                />
             </Box>
         </Box>
     )

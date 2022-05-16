@@ -19,11 +19,6 @@ export const facultyMenu = [
         link: '/Faculty/PersonalInfo'
     },
     {
-        name: 'Personal Information',
-        icon: <PersonIcon />,
-        link: '/Faculty/PersonalInfo'
-    },
-    {
         name: 'Educational Background',
         icon: <SchoolIcon />,
         link: '/Faculty/Educational'

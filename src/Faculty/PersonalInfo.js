@@ -19,7 +19,7 @@ const PersonalInfo = (props) => {
     const [selectedUser, setSelectedUser] = useState(null)
 
     const getUser = React.useCallback(async () => {
-        const {data} = await axiosInstance.get(`/users/${user._id}`)
+        const { data } = await axiosInstance.get(`/users/${user._id}`)
         setSelectedUser(data.user)
     }, [])
 
@@ -146,7 +146,7 @@ const PersonalInfo = (props) => {
                     fullWidth
                     label="Email Address"
                     placeholder='Email Address'
-                    value={values.email}
+                    value={user.userInfo.personalInformation.email}
                     name="email"
                     onChange={handleChange}
                     error={Boolean(errors.email) || touched.email}
@@ -162,7 +162,7 @@ const PersonalInfo = (props) => {
                     fullWidth
                     label="Password"
                     placeholder='Password'
-                    value={values.password}
+                    value={user.userInfo.personalInformation.password}
                     name="password"
                     onChange={handleChange}
                     error={Boolean(errors.password) || touched.password}
@@ -177,7 +177,7 @@ const PersonalInfo = (props) => {
                     fullWidth
                     label="Employee No."
                     placeholder='Employee No.'
-                    value={values.emp_no}
+                    value={user.userInfo.personalInformation.emp_no}
                     name="emp_no"
                     onChange={handleChange}
                     error={Boolean(errors.emp_no) || touched.emp_no}
@@ -193,7 +193,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="First Name"
                         placeholder='First Name'
-                        value={values.firstName}
+                        value={user.userInfo.personalInformation.firstName}
                         name="firstName"
                         onChange={handleChange}
                         error={Boolean(errors.firstName) || touched.firstName}
@@ -207,7 +207,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Last Name"
                         placeholder='Last Name'
-                        value={values.lastName}
+                        value={user.userInfo.personalInformation.lastName}
                         name="lastName"
                         onChange={handleChange}
                         error={Boolean(errors.lastName) || touched.lastName}
@@ -225,7 +225,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Middle Initial"
                         placeholder='Middle Initial'
-                        value={values.middleInitial}
+                        value={user.userInfo.personalInformation.middleInitial}
                         name="middleInitial"
                         onChange={handleChange}
                     />
@@ -236,7 +236,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Name Extension (II, III, Jr., Sr.)"
                         placeholder='Name Extension (II, III, Jr., Sr.)'
-                        value={values.nameExtension}
+                        value={user.userInfo.personalInformation.nameExtension}
                         name="nameExtension"
                         onChange={handleChange}
                     />
@@ -248,7 +248,7 @@ const PersonalInfo = (props) => {
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="Date of Birth"
-                            value={values.dateOfBirth}
+                            value={user.userInfo.personalInformation.dateOfBirth}
                             name="dateOfBirth"
                             onChange={(n) => setFieldValue("dateOfBirth", n)}
                             renderInput={(params) => <TextField {...params} size="small" fullWidth />}
@@ -263,7 +263,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Place of Birth"
                         placeholder='Place of Birth'
-                        value={values.placeBirth}
+                        value={user.userInfo.personalInformation.placeBirth}
                         name="placeBirth"
                         onChange={handleChange}
                     />
@@ -322,7 +322,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Height(cm)"
                         placeholder='Height(cm)'
-                        value={values.height}
+                        value={user.userInfo.personalInformation.height}
                         name="height"
                         onChange={handleChange}
                     />
@@ -333,7 +333,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Weight(kg)"
                         placeholder='Weight(kg)'
-                        value={values.weight}
+                        value={user.userInfo.personalInformation.weight}
                         name="weight"
                         onChange={handleChange}
                     />
@@ -368,7 +368,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="GSIS Number"
                         placeholder='GSIS Number'
-                        value={values.gsis}
+                        value={user.userInfo.personalInformation.gsis}
                         name="gsis"
                         onChange={handleChange}
                     />
@@ -379,7 +379,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="PAG-IBIG ID Number"
                         placeholder='PAG-IBIG ID Number'
-                        value={values.pagibig}
+                        value={user.userInfo.personalInformation.pagibig}
                         name="pagibig"
                         onChange={handleChange}
                     />
@@ -394,7 +394,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="PHILHEALTH Number"
                         placeholder='PHILHEALTH Number'
-                        value={values.phl_health}
+                        value={user.userInfo.personalInformation.phl_health}
                         name="phl_health"
                         onChange={handleChange}
                     />
@@ -405,7 +405,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="SSS Number"
                         placeholder='SSS Number'
-                        value={values.sss}
+                        value={user.userInfo.personalInformation.sss}
                         name="sss"
                         onChange={handleChange}
                     />
@@ -420,7 +420,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="TIN Number"
                         placeholder='TIN Number'
-                        value={values.tin}
+                        value={user.userInfo.personalInformation.tin}
                         name="tin"
                         onChange={handleChange}
                     />
@@ -432,13 +432,13 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Citizenship"
                         placeholder='Citizenship'
-                        value={values.citizenship}
+                        value={user.userInfo.personalInformation.citizenship}
                         name="citizenship"
                         onChange={handleChange}
                     />
                 </Box>
 
-                <Typography style={{ marginTop: 15, fontWeight: 600, fontSize: 18 }}>Resident Address (Some fields are required)</Typography>
+                <Typography style={{ marginTop: 15, fontWeight: 600, fontSize: 18 }}>Resident Address</Typography>
                 <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'row' }}>
                     <TextField
                         variant="outlined"
@@ -447,7 +447,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="House/​Block/​Lot No"
                         placeholder='House/​Block/​Lot No:'
-                        value={values.address.house_no}
+                        value={user.userInfo.personalInformation.address.house_no}
                         name="address.house_no"
                         onChange={handleChange}
                     />
@@ -458,7 +458,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Street"
                         placeholder='Street'
-                        value={values.address.street}
+                        value={user.userInfo.personalInformation.address.street}
                         name="address.street"
                         onChange={handleChange}
                     />
@@ -469,7 +469,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Subdivision/​Village"
                         placeholder='Subdivision/​Village'
-                        value={values.address.subd}
+                        value={user.userInfo.personalInformation.address.subd}
                         name="address.subd"
                         onChange={handleChange}
                     />
@@ -483,7 +483,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Barangay"
                         placeholder='Barangay'
-                        value={values.address.baranggay}
+                        value={user.userInfo.personalInformation.address.baranggay}
                         name="address.baranggay"
                         onChange={handleChange}
                     />
@@ -495,7 +495,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="City/​Municipality"
                         placeholder='City/​Municipality'
-                        value={values.city}
+                        value={user.userInfo.personalInformation.address.city}
                         name="address.city"
                         onChange={handleChange}
                     />
@@ -507,7 +507,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Province"
                         placeholder='Province'
-                        value={values.address.province}
+                        value={user.userInfo.personalInformation.address.province}
                         name="address.province"
                         onChange={handleChange}
                     />
@@ -520,14 +520,14 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="ZIP Code"
                         placeholder='ZIP Code'
-                        value={values.address.zip}
+                        value={user.userInfo.personalInformation.address.zip}
                         name="address.zip"
                         onChange={handleChange}
                     />
                 </Box>
 
-                <Typography style={{ marginTop: 15, fontWeight: 600, fontSize: 18 }}>Permanent Address (Some fields are required)</Typography>
-                <FormControlLabel label="Same as Resident Address" control={<Checkbox onChange={({ target }) => {
+                <Typography style={{ marginTop: 15, fontWeight: 600, fontSize: 18 }}>Permanent Address</Typography>
+                {/* <FormControlLabel label="Same as Resident Address" control={<Checkbox onChange={({ target }) => {
                     if (target.checked) {
                         setFieldValue("address2.house_no2", values.address.house_no)
                         setFieldValue("address2.street2", values.address.street)
@@ -545,7 +545,7 @@ const PersonalInfo = (props) => {
                         setFieldValue("address2.province2", "")
                         setFieldValue("address2.zip2", "")
                     }
-                }} />} />
+                }} />} /> */}
 
 
                 <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'row' }}>
@@ -556,7 +556,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="House/​Block/​Lot No"
                         placeholder='House/​Block/​Lot No:'
-                        value={values.address2.house_no2}
+                        value={user.userInfo.personalInformation.address2.house_no2}
                         name="address2.house_no2"
                         onChange={handleChange}
                     />
@@ -567,7 +567,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Street"
                         placeholder='Street'
-                        value={values.address2.street2}
+                        value={user.userInfo.personalInformation.address2.street2}
                         name="address2.street2"
                         onChange={handleChange}
                     />
@@ -578,7 +578,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Subdivision/​Village"
                         placeholder='Subdivision/​Village'
-                        value={values.address2.subd2}
+                        value={user.userInfo.personalInformation.address2.subd2}
                         name="address2.subd2"
                         onChange={handleChange}
                     />
@@ -592,7 +592,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Barangay"
                         placeholder='Barangay'
-                        value={values.address2.baranggay2}
+                        value={user.userInfo.personalInformation.address2.baranggay2}
                         name="address2.baranggay2"
                         onChange={handleChange}
                     />
@@ -604,7 +604,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="City/​Municipality"
                         placeholder='City/​Municipality'
-                        value={values.address2.city2}
+                        value={user.userInfo.personalInformation.address2.city2}
                         name="address2.city2"
                         onChange={handleChange}
                     />
@@ -616,7 +616,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Province"
                         placeholder='Province'
-                        value={values.address2.province2}
+                        value={user.userInfo.personalInformation.address2.province2}
                         name="address2.province2"
                         onChange={handleChange}
                     />
@@ -629,7 +629,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="ZIP Code"
                         placeholder='ZIP Code'
-                        value={values.address2.zip2}
+                        value={user.userInfo.personalInformation.address2.zip2}
                         name="address2.zip2"
                         onChange={handleChange}
                     />
@@ -645,7 +645,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Telephone No"
                         placeholder='Telephone No'
-                        value={values.TelNo}
+                        value={user.userInfo.personalInformation.TelNo}
                         name="TelNo"
                         onChange={handleChange}
                     />
@@ -657,7 +657,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Mobile Number"
                         placeholder='Mobile Number'
-                        value={values.MobileNum}
+                        value={user.userInfo.personalInformation.MobileNum}
                         name="MobileNum"
                         onChange={handleChange}
                     />
@@ -668,7 +668,7 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Alternative Email"
                         placeholder='Alternative Email'
-                        value={values.AltEmail}
+                        value={user.userInfo.personalInformation.AltEmail}
                         name="AltEmail"
                         onChange={handleChange}
                     />
