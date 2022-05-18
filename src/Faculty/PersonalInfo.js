@@ -95,10 +95,6 @@ const PersonalInfo = (props) => {
     const [civilStatus, setcivilStatus] = React.useState('');
     const [btype, setbtype] = React.useState('');
 
-    const handleChangeCivilStatus = (event) => {
-        setcivilStatus(event.target.value)
-    }
-
     const handleChangeBType = (event) => {
         setbtype(event.target.value)
     }
@@ -139,6 +135,7 @@ const PersonalInfo = (props) => {
             <Box sx={{ marginTop: 2 }} component="form" onSubmit={handleSubmit}>
 
                 <TextField sx={{ mt: 5 }}
+                    disabled
                     required
                     variant="outlined"
                     style={{ marginBottom: 20 }}
@@ -283,7 +280,7 @@ const PersonalInfo = (props) => {
                         label="Age"
                         placeholder='Age'
                         name='age'
-                        value={new Date().getFullYear() - values.dateOfBirth.getFullYear() - 1}
+                        value={user.userInfo.personalInformation.age}
                     />
                 </Box>
                 <Box sx={{ marginBottom: 3, width: '100%' }}>
@@ -292,10 +289,9 @@ const PersonalInfo = (props) => {
                         <Select
                             labelId="civilStatus"
                             id="civilStatus"
-                            value={civilStatus}
+                            value={user.userInfo.personalInformation.civilStatus}
                             label="Civil Status"
-                            onChange={handleChangeCivilStatus}
-                        >
+                            onChange={e=>setcivilStatus(e.target.value)}>
                             <MenuItem value={'Single'}>Single</MenuItem>
                             <MenuItem value={'In a Relationship'}>In a Relationship</MenuItem>
                             <MenuItem value={'Married'}>Married</MenuItem>
