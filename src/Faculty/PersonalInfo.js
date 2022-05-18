@@ -149,8 +149,6 @@ const PersonalInfo = (props) => {
                     value={user.userInfo.personalInformation.email}
                     name="email"
                     onChange={handleChange}
-                    error={Boolean(errors.email) || touched.email}
-                    helperText={errors.email}
                 />
 
                 <TextField
@@ -165,8 +163,6 @@ const PersonalInfo = (props) => {
                     value={user.userInfo.personalInformation.password}
                     name="password"
                     onChange={handleChange}
-                    error={Boolean(errors.password) || touched.password}
-                    helperText={errors.password}
                 />
 
                 <TextField
@@ -180,8 +176,6 @@ const PersonalInfo = (props) => {
                     value={user.userInfo.personalInformation.emp_no}
                     name="emp_no"
                     onChange={handleChange}
-                    error={Boolean(errors.emp_no) || touched.emp_no}
-                    helperText={errors.emp_no}
                 />
 
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
@@ -196,8 +190,6 @@ const PersonalInfo = (props) => {
                         value={user.userInfo.personalInformation.firstName}
                         name="firstName"
                         onChange={handleChange}
-                        error={Boolean(errors.firstName) || touched.firstName}
-                        helperText={errors.firstName}
                     />
                     <TextField
                         required
@@ -210,8 +202,6 @@ const PersonalInfo = (props) => {
                         value={user.userInfo.personalInformation.lastName}
                         name="lastName"
                         onChange={handleChange}
-                        error={Boolean(errors.lastName) || touched.lastName}
-                        helperText={errors.lastName}
                     />
                 </Box>
 
