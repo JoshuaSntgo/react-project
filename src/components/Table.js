@@ -48,7 +48,9 @@ const Table = () => {
                                 <b>APPROVED</b>
                             </Typography>
 
-                            <Typography sx={{ mb: 1.5, fontSize: 30, fontWeight: 700 }} color="text.secondary">
+                            <Typography
+                                sx={{ mb: 1.5, fontSize: 30, fontWeight: 700 }}
+                                color="text.secondary">
                                 {users.filter(a => a.isConfirmed).length}
                             </Typography>
                         </CardContent>
@@ -92,7 +94,7 @@ const Table = () => {
                 </Grid>
 
                 <Grid xs={12} sm={5}>
-                    <div className="ag-theme-alpine" style={{ height: 600, width: '100%', marginTop: 20, marginLeft: 25}}>
+                    <div className="ag-theme-alpine" style={{ height: 600, width: 1600, marginTop: 20, marginLeft: 25}}>
                         <AgGridReact
                         pagination={true}
                         paginationPageSize={10}

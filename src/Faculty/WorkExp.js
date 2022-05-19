@@ -1,5 +1,5 @@
 import { Add, Edit } from '@mui/icons-material'
-import { Box, Button, Card, Dialog, DialogActions, DialogContent, DialogTitle, Radio, RadioGroup, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, Radio, RadioGroup, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
@@ -53,26 +53,49 @@ function WorkExp(props) {/* Code for getting user information */
     }
     console.log(values)
     return (
-        <Box sx={{ padding: 5, display: 'flex' }}>
-            <Sidebar />
-            <Typography variant='h6'>Personal Information</Typography>
+        <Card sx={{ padding: 5, display: 'flex' }}>
+                
+            <Sidebar></Sidebar>
+            
+            <Box sx={{ marginTop: 1 }} component="form">
 
-            <pre>{JSON.stringify(selectedUser, null, 4)}</pre>
-            <Box sx={{ marginTop: 2 }} component="form" >
+                <Typography variant='h6'>Work Experience</Typography>
 
-                <TextField sx={{ mt: 5 }}
-                    required
-                    variant="outlined"
-                    style={{ marginBottom: 20 }}
-                    size="small"
-                    fullWidth
-                    label="Company"
-                    placeholder='Company'
-                    value={user.userInfo.workexp.WorkData.company}
-                    name="email"
-                />
+                <Grid container spacing={2} style={{marginRight: 10}}>
+                    <Grid xs={12} sm={4}>
+                        <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
+                            <CardContent>
+                                <Typography style={{ fontWeight: 600, fontSize: 18 }}>
+                                    {user.userInfo.workexp.WorkData[0].positionTitle}</Typography>
+                                <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
+                                    {user.userInfo.workexp.WorkData[0].company}
+                                </Typography>
+                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                    {user.userInfo.workexp.WorkData[0].statusOfAppointment}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+
+                    <Grid xs={12} sm={4}>
+                        <Card sx={{ minWidth: 700, marginLeft: 30, marginTop: 5 }}>
+                            <CardContent>
+                                <Typography style={{ fontWeight: 600, fontSize: 18 }}>
+                                    {user.userInfo.workexp.WorkData[0].positionTitle}</Typography>
+                                <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
+                                    {user.userInfo.workexp.WorkData[0].company}
+                                </Typography>
+                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                    {user.userInfo.workexp.WorkData[0].statusOfAppointment}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+
+                </Grid>
             </Box>
-        </Box>
+
+        </Card>
     )
 }
 

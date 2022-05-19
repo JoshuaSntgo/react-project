@@ -10,15 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updatePersonalInfo } from '../reducer';
 
 function PersonalInformation(props) {
-
-  const user = useSelector(state => state.userInfo)
+  
   const dispatch = useDispatch()
-  const Civil_Status = [
-    "Single",
-    "In a Relationship",
-    "Married",
-    "Divorced"
-  ]
 
   const { activeStep, handleBack, handleNext, steps } = props
 

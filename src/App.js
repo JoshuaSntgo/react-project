@@ -16,7 +16,7 @@ import { Provider } from 'react-redux'
 import { store } from './store/index'
 import { AdminRoute, AppRoute, UserRoute } from './utilities/Routes';
 import Fpersonalinfo from './Faculty/PersonalInfo';
-import Feducational from './Faculty/Educational';
+import Feducational from './Faculty/Educ';
 import FCSE from './Faculty/CSE';
 import FWorkExp from './Faculty/WorkExp';
 

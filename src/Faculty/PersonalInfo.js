@@ -27,7 +27,11 @@ const PersonalInfo = (props) => {
         getUser()
     }, [getUser])
 
-    /* End Code for getting user information */
+    /* End Code for getting user information 
+    
+    
+            <pre>{JSON.stringify(selectedUser, null, 4)}</pre> will print all the data
+    */
 
 
     const userInfo = useSelector(state => state.userInfo)
@@ -129,11 +133,9 @@ const PersonalInfo = (props) => {
     return (
         <Box sx={{ padding: 5, display: 'flex' }}>
             <Sidebar />
-            <Typography variant='h6'>Personal Information</Typography>
-
-            <pre>{JSON.stringify(selectedUser, null, 4)}</pre>
-            <Box sx={{ marginTop: 2 }} component="form" onSubmit={handleSubmit}>
-
+            <Box sx={{ marginTop: 1}} component="form" onSubmit={handleSubmit}>
+                <Typography variant='h6'>Personal Information</Typography>
+                <Box sx={{marginLeft: 30}}>
                 <TextField sx={{ mt: 5 }}
                     disabled
                     required
@@ -283,6 +285,7 @@ const PersonalInfo = (props) => {
                         value={user.userInfo.personalInformation.age}
                     />
                 </Box>
+
                 <Box sx={{ marginBottom: 3, width: '100%' }}>
                     <FormControl fullWidth>
                         <InputLabel id="civilStatus">Civil Status</InputLabel>
@@ -326,10 +329,10 @@ const PersonalInfo = (props) => {
                     <FormControl sx={{ marginBottom: 3, width: '50%' }}>
                         <InputLabel id="btype" style={{ marginTop: -7 }}>Blood Type</InputLabel>
                         <Select
-                            required
+                            disabled
                             labelId="btype"
                             id="btype"
-                            value={btype}
+                            value={user.userInfo.personalInformation.btype}
                             label="Blood Type"
                             size="small"
                             onChange={handleChangeBType}
@@ -371,7 +374,6 @@ const PersonalInfo = (props) => {
                     />
                 </Box>
 
-
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <TextField
                         variant="outlined"
@@ -396,7 +398,6 @@ const PersonalInfo = (props) => {
                         onChange={handleChange}
                     />
                 </Box>
-
 
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <TextField
@@ -425,6 +426,7 @@ const PersonalInfo = (props) => {
                 </Box>
 
                 <Typography style={{ marginTop: 15, fontWeight: 600, fontSize: 18 }}>Resident Address</Typography>
+                
                 <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'row' }}>
                     <TextField
                         variant="outlined"
@@ -460,6 +462,7 @@ const PersonalInfo = (props) => {
                         onChange={handleChange}
                     />
                 </Box>
+
                 <Box sx={{ display: 'flex', flexDirection: 'row' }} >
                     <TextField
                         required
@@ -569,6 +572,7 @@ const PersonalInfo = (props) => {
                         onChange={handleChange}
                     />
                 </Box>
+                
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <TextField
                         required
@@ -660,6 +664,7 @@ const PersonalInfo = (props) => {
                     />
                 </Box>
 
+                </Box>
             </Box>
         </Box>
     )

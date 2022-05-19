@@ -27,6 +27,7 @@ const UserManagement = () => {
         getUsers()
     }, [getUsers])
     const [pageSize, setPageSize] = React.useState(10);
+    
     return (
 
         <Box sx={{ display: 'flex' }}>
