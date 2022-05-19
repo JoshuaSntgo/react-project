@@ -36,34 +36,11 @@ function Educational(props) {
 
   const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
     initialValues,
-    validationSchema: Yup.object({
-      educs: Yup.array().of(
-        Yup.object().shape({
-          schoolName: Yup.string().required("School Name is required"),
-          course: Yup.string().required("Course is required"),
-          from: Yup.object({
-            month: Yup.string().required(),
-            year: Yup.string().required(),
-          }),
-          to: Yup.object({
-            month: Yup.string().required(),
-            year: Yup.string().required(),
-          }),
-          unitsEarned: Yup.number().required(),
-          awards: Yup.string()
-        })
-      ),
-    }),
-    onSubmit: async (values) => {
-      console.log(values)
-      dispatch(updateEducs(values))
-      handleNext()
-    }
   })
   const handleAdd = (data) => {
     setFieldValue("educs", [...values.educs, data])
   }
-  console.log(values)
+  
   return (
     <Box sx={{ padding: 5, display: 'flex' }}>
       <Sidebar />
