@@ -11,6 +11,8 @@ import { useHistory } from 'react-router-dom';
 const steps = ['Personal Information', 'Educational Background', 'Civil Service Eligibility', 'Work Experience', 'Trainings and Programs',];
 
 function PersonalDataSheet() {
+
+    const { push } = useHistory()
     const history = useHistory()
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
@@ -38,6 +40,12 @@ function PersonalDataSheet() {
         setActiveStep(0);
     };
 
+    const backtoLogin = () => {
+        sessionStorage.clear()
+        push("sign-in")
+        return window.location.reload()
+    }
+
     return (
         <Container>
             <Box sx={{ width: '100%', marginTop: 5 }} component={Paper} p={2}>
@@ -62,7 +70,7 @@ function PersonalDataSheet() {
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                             <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={() => history.push("Faculty/PersonalInfo")}>Proceed to your Dashboard</Button>
+                            <Button onClick={backtoLogin}>Proceed to Login</Button>
                         </Box>
                     </React.Fragment>
                 ) : (
@@ -85,7 +93,7 @@ function PersonalDataSheet() {
                     </React.Fragment>
                 )}
             </Box>
-        </Container>
+        </Container >
     )
 }
 

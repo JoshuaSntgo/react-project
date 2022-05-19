@@ -37,11 +37,11 @@ function PersonalInformation(props) {
   const { activeStep, handleBack, handleNext, steps } = props
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: user.email,
+    password: user.password,
     emp_no: "",
-    firstName: "",
-    lastName: "",
+    firstName: user.firstName,
+    lastName: user.lastName,
     middleInitial: "",
     nameExtension: "",
     dateOfBirth: new Date(),
@@ -128,45 +128,30 @@ function PersonalInformation(props) {
   })
 
   return (
-    <Box sx={{ padding: 5, }}>
+    < Box sx={{ padding: 5, }
+    }>
       <Typography style={{ fontWeight: 600, fontSize: 18 }}>Personal Information</Typography>
       <Typography style={{ color: '#b4b4b4', fontSize: 15 }}>Please complete the information below. If the field is not applicable, type N/A</Typography>
 
       <Box sx={{ marginTop: 2 }} component="form" onSubmit={handleSubmit}>
 
         <TextField
-          required
           variant="outlined"
           style={{ marginBottom: 20 }}
           size="small"
           fullWidth
           label="Email Address"
           placeholder='Email Address'
-          value={user.email + " "}
+          value={values.email}
           name="email"
-          onChange={handleChange}
-          error={Boolean(errors.email) || touched.email}
-          helperText={errors.email}
+          onChange={({ target }) => setFieldValue('email', target.value)}
+          InputLabelProps={{
+            shrink: true
+          }}
         />
 
-        <TextField
-          required
-          variant="outlined"
-          type='password'
-          style={{ marginBottom: 20 }}
-          size="small"
-          fullWidth
-          label="Password"
-          placeholder='Password'
-          value={user.password + " "}
-          name="password"
-          onChange={handleChange}
-          error={Boolean(errors.password) || touched.password}
-          helperText={errors.password}
-        />
 
         <TextField
-          required
           variant="outlined"
           style={{ marginBottom: 20 }}
           size="small"
@@ -176,38 +161,39 @@ function PersonalInformation(props) {
           value={values.emp_no}
           name="emp_no"
           onChange={handleChange}
-          error={Boolean(errors.emp_no) || touched.emp_no}
-          helperText={errors.emp_no}
+          InputLabelProps={{
+            shrink: true
+          }}
         />
 
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
           <TextField
-            required
             variant="outlined"
             style={{ marginBottom: 20, width: '50%', marginRight: 10 }}
             size="small"
             fullWidth
             label="First Name"
             placeholder='First Name'
-            value={user.firstName + " "}
+            value={values.firstName}
             name="firstName"
             onChange={handleChange}
-            error={Boolean(errors.firstName) || touched.firstName}
-            helperText={errors.firstName}
+            InputLabelProps={{
+              shrink: true
+            }}
           />
           <TextField
-            required
             variant="outlined"
             style={{ marginBottom: 20, width: '50%' }}
             size="small"
             fullWidth
             label="Last Name"
             placeholder='Last Name'
-            value={user.lastName + " "}
+            value={values.lastName}
             name="lastName"
             onChange={handleChange}
-            error={Boolean(errors.lastName) || touched.lastName}
-            helperText={errors.lastName}
+            InputLabelProps={{
+              shrink: true
+            }}
           />
         </Box>
 
@@ -275,10 +261,11 @@ function PersonalInformation(props) {
           <RadioGroup row
             aria-labelledby="demo-radio-buttons-group-label"
             name="gender"
+
             style={{ marginBottom: 20, width: '40%', marginRight: 20 }} >
-            <FormControlLabel name="gender" value="male" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Male" : "")} />} label="Male" />
-            <FormControlLabel name="gender" value="female" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Femail" : "")} />} label="Female" />
-            <FormControlLabel name="gender" value="other" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Other" : "")} />} label="Other" />
+            <FormControlLabel name="gender" value="Male" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Male" : "")} />} label="Male" />
+            <FormControlLabel name="gender" value="Female" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Female" : "")} />} label="Female" />
+            <FormControlLabel name="gender" value="Other" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? "Other" : "")} />} label="Other" />
           </RadioGroup>
 
           <TextField
@@ -689,7 +676,7 @@ function PersonalInformation(props) {
         </Box>
 
       </Box>
-    </Box>
+    </Box >
   )
 }
 

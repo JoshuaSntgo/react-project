@@ -46,7 +46,7 @@ const PersonalInfo = (props) => {
     const { activeStep, handleBack, handleNext, steps } = props
 
     const initialValues = {
-        email: "",
+        email: user.userInfo.personalInformation.email,
         password: "",
         emp_no: "",
         firstName: "",
@@ -146,22 +146,8 @@ const PersonalInfo = (props) => {
                         fullWidth
                         label="Email Address"
                         placeholder='Email Address'
-                        value={user.userInfo.personalInformation.email}
+                        value={values.email}
                         name="email"
-                        onChange={handleChange}
-                    />
-
-                    <TextField
-                        required
-                        variant="outlined"
-                        type='password'
-                        style={{ marginBottom: 20 }}
-                        size="small"
-                        fullWidth
-                        label="Password"
-                        placeholder='Password'
-                        value={user.userInfo.personalInformation.password}
-                        name="password"
                         onChange={handleChange}
                     />
 
@@ -266,10 +252,11 @@ const PersonalInfo = (props) => {
                         <RadioGroup row
                             aria-labelledby="demo-radio-buttons-group-label"
                             name="gender"
+                            defaultValue={user.userInfo.personalInformation.gender}
                             style={{ marginBottom: 20, width: '40%', marginRight: 20 }} >
-                            <FormControlLabel name="gender" value="male" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? true : true)} />} label="Male" />
-                            <FormControlLabel name="gender" value="female" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? false : true)} />} label="Female" />
-                            <FormControlLabel name="gender" value="other" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? false : true)} />} label="Other" />
+                            <FormControlLabel disabled name="gender" value="Male" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? true : true)} />} label="Male" />
+                            <FormControlLabel disabled name="gender" value="Female" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? false : true)} />} label="Female" />
+                            <FormControlLabel disabled name="gender" value="Other" control={<Radio onChange={(e) => setFieldValue("gender", e.target.checked ? false : true)} />} label="Other" />
                         </RadioGroup>
 
                         <TextField

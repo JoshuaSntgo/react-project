@@ -7,36 +7,44 @@ import * as Yup from 'yup'
 import axiosInstance from '../axios/Index';
 import { useHistory } from 'react-router-dom';
 const LoginForm = ({ submitForm }) => {
-  const {push} = useHistory()
+  const { push } = useHistory()
   const formik = useFormik({
     initialValues: {
-      email: '', 
+      email: '',
       password: ''
-    }, 
+    },
     validationSchema: Yup.object({
-      email: Yup.string().email("Please provide us a valid email address").required('Email is required'), 
+      email: Yup.string().email("Please provide us a valid email address").required('Email is required'),
       password: Yup.string().required("Password is required")
-    }), 
-    onSubmit: async (values, {setSubmitting, setFieldError}) => {
+    }),
+    onSubmit: async (values, { setSubmitting, setFieldError }) => {
       console.log(values)
-      const {data} = await axiosInstance.post('/users/auth', values)
-      if (!data.success){
-        return setFieldError("email", data.message) 
+      const { data } = await axiosInstance.post('/users/auth', values)
+      if (!data.success) {
+        return setFieldError("email", data.message)
       }
-      if(!data.user.isConfirmed) {
+      if (!data.user.isConfirmed) {
         return setFieldError("email", 'Your account is not yet approved.')
       }
       sessionStorage.setItem('user', JSON.stringify(data.user))
       sessionStorage.setItem('token', data.access_token)
-      
+
       if (data.user.access_level === 1) {
-        push('/formsnew')
-        return window.location.reload()
-      } 
+        if (data.user.userInfo === Object.isEmpty) {
+
+          push('/formsnew')
+          return window.location.reload()
+        }
+        else {
+          push('/Faculty/PersonalInfo')
+          return window.location.reload()
+        }
+
+      }
       if (data.user.access_level === 2) {
         push('/admin/dashboard');
         return window.location.reload()
-      } 
+      }
     }
   })
   const { handleChange, handleSubmit, values, errors } = useForm(
