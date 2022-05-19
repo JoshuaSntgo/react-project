@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, TextField, Typography, Radio, RadioGroup, FormControlLabel, MenuItem, Select, Checkbox, InputLabel, FormControl } from '@mui/material'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -8,10 +8,31 @@ import { ButtonsComponent } from '..';
 import { width } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePersonalInfo } from '../reducer';
+import axiosInstance from '../../axios/Index';
+import { fetchFromStorage } from '../../utilities/Storage';
+
 
 function PersonalInformation(props) {
-  
+  /* Code for getting user information */
+  const user = fetchFromStorage('user')
+  const [selectedUser, setSelectedUser] = useState(null)
+
+  const getUser = React.useCallback(async () => {
+    const { data } = await axiosInstance.get(`/users/${user._id}`)
+    setSelectedUser(data.user)
+  }, [])
+
+  useEffect(() => {
+    getUser()
+  }, [getUser])
+  const userInfo = useSelector(state => state.userInfo)
   const dispatch = useDispatch()
+  const Civil_Status = [
+    "Single",
+    "In a Relationship",
+    "Married",
+    "Divorced"
+  ]
 
   const { activeStep, handleBack, handleNext, steps } = props
 
@@ -121,7 +142,7 @@ function PersonalInformation(props) {
           fullWidth
           label="Email Address"
           placeholder='Email Address'
-          value={values.email}
+          value={user.email + " "}
           name="email"
           onChange={handleChange}
           error={Boolean(errors.email) || touched.email}
@@ -137,7 +158,7 @@ function PersonalInformation(props) {
           fullWidth
           label="Password"
           placeholder='Password'
-          value={values.password}
+          value={user.password + " "}
           name="password"
           onChange={handleChange}
           error={Boolean(errors.password) || touched.password}
@@ -168,7 +189,7 @@ function PersonalInformation(props) {
             fullWidth
             label="First Name"
             placeholder='First Name'
-            value={values.firstName}
+            value={user.firstName + " "}
             name="firstName"
             onChange={handleChange}
             error={Boolean(errors.firstName) || touched.firstName}
@@ -182,7 +203,7 @@ function PersonalInformation(props) {
             fullWidth
             label="Last Name"
             placeholder='Last Name'
-            value={values.lastName}
+            value={user.lastName + " "}
             name="lastName"
             onChange={handleChange}
             error={Boolean(errors.lastName) || touched.lastName}
