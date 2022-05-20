@@ -17,66 +17,49 @@ const range = (start, stop, step) => Array.from({ length: (stop - start) / step 
 
 function TNP(props) {
 
-  /* Code for getting user information */
-  const user = fetchFromStorage('user')
-  const [selectedUser, setSelectedUser] = useState(null)
+    /* Code for getting user information */
+    const user = fetchFromStorage('user')
+    const [selectedUser, setSelectedUser] = useState(null)
 
-  const getUser = React.useCallback(async () => {
-      const { data } = await axiosInstance.get(`/users/${user._id}`)
-      setSelectedUser(data.user)
-  }, [])
+    const getUser = React.useCallback(async () => {
+        const { data } = await axiosInstance.get(`/users/${user._id}`)
+        setSelectedUser(data.user)
+    }, [])
 
-  useEffect(() => {
-      getUser()
-  }, [getUser])
+    useEffect(() => {
+        getUser()
+    }, [getUser])
 
-  /* End Code for getting user information */
-  
-  return (
-    <Card sx={{ padding: 5, display: 'flex' }}>
-                    
-    <Sidebar></Sidebar>
-    
-    <Box sx={{ marginTop: 1 }} component="form">
+    /* End Code for getting user information */
 
-        <Typography variant='h6'>Civil Service</Typography>
+    return (
+        <Card sx={{ padding: 5, display: 'flex' }}>
 
-        <Grid container spacing={2} style={{marginRight: 10}}>
-            <Grid xs={12} sm={4}>
-                <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
-                    <CardContent>
-                        <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-                            {user.userInfo.workexp.WorkData[0].positionTitle}</Typography>
-                        <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                            {user.userInfo.workexp.WorkData[0].company}
-                        </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            {user.userInfo.workexp.WorkData[0].statusOfAppointment}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-
-            <Grid xs={12} sm={4}>
-                <Card sx={{ minWidth: 700, marginLeft: 30, marginTop: 5 }}>
-                    <CardContent>
-                        <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-                            {user.userInfo.workexp.WorkData[0].positionTitle}</Typography>
-                        <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                            {user.userInfo.workexp.WorkData[0].company}
-                        </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            {user.userInfo.workexp.WorkData[0].statusOfAppointment}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-
-        </Grid>
-    </Box>
-
-    </Card>
-  )
+            <Sidebar></Sidebar>
+            <Box sx={{ marginTop: 1 }} component="form">
+                <Typography variant='h6'>Educational Background</Typography>
+                {selectedUser !== null && selectedUser.userInfo.educ.educs.map((us) => (
+                    <Grid container spacing={2} style={{ marginRight: 10 }}>
+                        <Grid xs={12} sm={4}>
+                            <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
+                                <CardContent>
+                                    <Typography sx={{ mb: 1.5, marginTop: 2 }} color="text.secondary">
+                                        {us.schoolName}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        {us.course}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        {us.from.year} - {us.to.year}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
+                ))}
+            </Box>
+        </Card>
+    )
 }
 
 export default TNP

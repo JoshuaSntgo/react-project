@@ -34,49 +34,28 @@ function CSE(props) {
     /* End Code for getting user information */
     return (
         <Card sx={{ padding: 5, display: 'flex' }}>
-                    
+
             <Sidebar></Sidebar>
-            
             <Box sx={{ marginTop: 1 }} component="form">
-
-                <Typography variant='h6'>Civil Service</Typography>
-
-                <Grid container spacing={2} style={{marginRight: 10}}>
-                    <Grid xs={12} sm={4}>
-                        <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
-                            <CardContent>
-                                <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-                                    {user.userInfo.workexp.WorkData[0].positionTitle}</Typography>
-                                <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                                    {user.userInfo.workexp.WorkData[0].company}
-                                </Typography>
-                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                    {user.userInfo.workexp.WorkData[0].statusOfAppointment}
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                <Typography variant='h6'>Educational Background</Typography>
+                {selectedUser !== null && selectedUser.userInfo.civilservice.CivilData.map((us) => (
+                    <Grid container spacing={2} style={{ marginRight: 10 }}>
+                        <Grid xs={12} sm={4}>
+                            <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
+                                <CardContent>
+                                    <Typography sx={{ mb: 1.5, marginTop: 2 }} color="text.secondary">
+                                        {us.civilService}
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        {us.dateOfValidity}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     </Grid>
-
-                    <Grid xs={12} sm={4}>
-                        <Card sx={{ minWidth: 700, marginLeft: 30, marginTop: 5 }}>
-                            <CardContent>
-                                <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-                                    {user.userInfo.workexp.WorkData[0].positionTitle}</Typography>
-                                <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                                    {user.userInfo.workexp.WorkData[0].company}
-                                </Typography>
-                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                    {user.userInfo.workexp.WorkData[0].statusOfAppointment}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-
-                </Grid>
+                ))}
             </Box>
-
         </Card>
     )
 }
-
 export default CSE
