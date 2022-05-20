@@ -137,7 +137,6 @@ const PersonalInfo = (props) => {
                 <Typography variant='h6'>Personal Information</Typography>
                 <Box sx={{ marginLeft: 30 }}>
                     <TextField sx={{ mt: 5 }}
-                        disabled
                         required
                         variant="outlined"
                         style={{ marginBottom: 20 }}
@@ -148,10 +147,13 @@ const PersonalInfo = (props) => {
                         value={values.email}
                         name="email"
                         onChange={handleChange}
+                        InputProps={{
+                            readOnly: true,
+                        }}
                     />
 
                     <TextField
-                        required
+                        
                         variant="outlined"
                         style={{ marginBottom: 20 }}
                         size="small"
@@ -160,12 +162,15 @@ const PersonalInfo = (props) => {
                         placeholder='Employee No.'
                         value={user.userInfo.personalInformation.emp_no}
                         name="emp_no"
+                        InputProps={{
+                            readOnly: true,
+                        }}
                         onChange={handleChange}
                     />
 
                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                         <TextField
-                            required
+                            
                             variant="outlined"
                             style={{ marginBottom: 20, width: '50%', marginRight: 10 }}
                             size="small"
@@ -175,9 +180,12 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.firstName}
                             name="firstName"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                         />
                         <TextField
-                            required
+                            
                             variant="outlined"
                             style={{ marginBottom: 20, width: '50%' }}
                             size="small"
@@ -187,13 +195,16 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.lastName}
                             name="lastName"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                         />
                     </Box>
 
                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
 
                         <TextField
-                            required
+                            
                             variant="outlined"
                             style={{ marginBottom: 20, width: '50%', marginRight: 10 }}
                             size="small"
@@ -203,6 +214,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.middleInitial}
                             name="middleInitial"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -214,6 +228,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.nameExtension}
                             name="nameExtension"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                         />
 
                     </Box>
@@ -223,6 +240,7 @@ const PersonalInfo = (props) => {
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
                                 label="Date of Birth"
+                                readOnly
                                 value={user.userInfo.personalInformation.dateOfBirth}
                                 name="dateOfBirth"
                                 onChange={(n) => setFieldValue("dateOfBirth", n)}
@@ -231,7 +249,7 @@ const PersonalInfo = (props) => {
                         </LocalizationProvider>
 
                         <TextField
-                            required
+                            
                             variant="outlined"
                             style={{ marginBottom: 20, width: '100%', marginLeft: 10 }}
                             size="small"
@@ -241,6 +259,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.placeBirth}
                             name="placeBirth"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true,
+                            }}
                         />
                     </Box>
 
@@ -281,6 +302,7 @@ const PersonalInfo = (props) => {
                                 id="civilStatus"
                                 value={user.userInfo.personalInformation.civilStatus}
                                 label="Civil Status"
+                                inputProps={{ readOnly: true }}
                                 onChange={e => setcivilStatus(e.target.value)}>
                                 <MenuItem value={'Single'}>Single</MenuItem>
                                 <MenuItem value={'In a Relationship'}>In a Relationship</MenuItem>
@@ -301,6 +323,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.height}
                             name="height"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -312,11 +337,14 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.weight}
                             name="weight"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <FormControl sx={{ marginBottom: 3, width: '50%' }}>
                             <InputLabel id="btype" style={{ marginTop: -7 }}>Blood Type</InputLabel>
                             <Select
-                                disabled
+                                inputProps={{ readOnly: true }}
                                 labelId="btype"
                                 id="btype"
                                 value={user.userInfo.personalInformation.btype}
@@ -347,6 +375,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.gsis}
                             name="gsis"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -358,6 +389,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.pagibig}
                             name="pagibig"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                     </Box>
 
@@ -372,6 +406,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.phl_health}
                             name="phl_health"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -383,6 +420,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.sss}
                             name="sss"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                     </Box>
 
@@ -397,6 +437,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.tin}
                             name="tin"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             required
@@ -409,6 +452,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.citizenship}
                             name="citizenship"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                     </Box>
 
@@ -425,6 +471,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address.house_no}
                             name="address.house_no"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -436,6 +485,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address.street}
                             name="address.street"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -447,6 +499,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address.subd}
                             name="address.subd"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                     </Box>
 
@@ -462,6 +517,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address.baranggay}
                             name="address.baranggay"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             required
@@ -474,6 +532,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address.city}
                             name="address.city"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             required
@@ -486,6 +547,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address.province}
                             name="address.province"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
 
                         <TextField
@@ -499,6 +563,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address.zip}
                             name="address.zip"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                     </Box>
 
@@ -535,6 +602,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address2.house_no2}
                             name="address2.house_no2"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -546,6 +616,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address2.street2}
                             name="address2.street2"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -557,6 +630,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address2.subd2}
                             name="address2.subd2"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                     </Box>
 
@@ -572,6 +648,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address2.baranggay2}
                             name="address2.baranggay2"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             required
@@ -584,6 +663,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address2.city2}
                             name="address2.city2"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             required
@@ -596,6 +678,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address2.province2}
                             name="address2.province2"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
 
                         <TextField
@@ -609,6 +694,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.address2.zip2}
                             name="address2.zip2"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                     </Box>
 
@@ -625,6 +713,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.TelNo}
                             name="TelNo"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             required
@@ -637,6 +728,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.MobileNum}
                             name="MobileNum"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                         <TextField
                             variant="outlined"
@@ -648,6 +742,9 @@ const PersonalInfo = (props) => {
                             value={user.userInfo.personalInformation.AltEmail}
                             name="AltEmail"
                             onChange={handleChange}
+                            InputProps={{
+                                readOnly: true
+                            }}
                         />
                     </Box>
 

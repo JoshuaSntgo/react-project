@@ -37,23 +37,23 @@ function CSE(props) {
 
             <Sidebar></Sidebar>
             <Box sx={{ marginTop: 1 }} component="form">
-                <Typography variant='h6'>Civil Service Eligibility</Typography>
-                {selectedUser !== null && selectedUser.userInfo.civilservice.CivilData.map((us) => (
-                    <Grid container spacing={2} style={{ marginRight: 10 }}>
-                        <Grid xs={12} sm={4}>
-                            <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
+                <Typography variant='h6'>Educational Background</Typography>
+                <Grid container spacing={2}>
+                    {selectedUser !==null && selectedUser.userInfo.civilservice.CivilData.map((us) => (
+                        <Grid xs={12} sm={5}>
+                            <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4 }}>
                                 <CardContent>
-                                    <Typography sx={{ mb: 1.5, marginTop: 2 }} color="text.secondary">
+                                    <Typography style={{ fontWeight: 600, fontSize: 18, marginTop:5 }}>
                                         {us.civilService}
                                     </Typography>
                                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                        {us.dateOfValidity}
+                                        Date of Availability: {us.dateOfValidity}
                                     </Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
-                    </Grid>
-                ))}
+                    ))}
+                </Grid>
             </Box>
         </Card>
     )
