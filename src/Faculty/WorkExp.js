@@ -29,16 +29,16 @@ function WorkExp(props) {
 
     return (
         <Card sx={{ padding: 5, display: 'flex' }}>
-            
+
             <Sidebar></Sidebar>
             <Box sx={{ marginTop: 1 }} component="form">
-                <Typography variant='h6'>Educational Background</Typography>
+                <Typography variant='h6'>Work Experience</Typography>
                 <Grid container spacing={2}>
-                    {selectedUser !==null && selectedUser.userInfo.workexp.WorkData.map((us) => (
+                    {selectedUser !== null && selectedUser.userInfo.workexp.WorkData.map((us) => (
                         <Grid xs={12} sm={5}>
                             <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4, borderStyle: 'solid' }}>
                                 <CardContent>
-                                    <Typography style={{ fontWeight: 600, fontSize: 18, marginTop:5 }}>
+                                    <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
                                         {us.positionTitle}
                                     </Typography>
                                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
