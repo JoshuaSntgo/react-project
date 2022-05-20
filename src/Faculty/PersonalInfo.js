@@ -12,6 +12,10 @@ import { updatePersonalInfo } from '../form/reducer';
 import axiosInstance from '../axios/Index';
 import { fetchFromStorage } from '../utilities/Storage';
 
+
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+
 const PersonalInfo = (props) => {
 
     /* Code for getting user information */
@@ -103,6 +107,17 @@ const PersonalInfo = (props) => {
         setbtype(event.target.value)
     }
 
+    const exportPdf = () => {
+
+        html2canvas(document.querySelector("#capture")).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'pt', 'letter', false);
+            pdf.addImage(imgData, 'PNG', 0, 0, 600, 0, undefined, false); // padding left, padding top, size, 0,
+            pdf.save("Personal Info.pdf");
+        });
+
+    }
+
     const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
         initialValues,
 
@@ -133,9 +148,10 @@ const PersonalInfo = (props) => {
     return (
         <Box sx={{ padding: 5, display: 'flex' }}>
             <Sidebar />
-            <Box sx={{ marginTop: 1 }} component="form" onSubmit={handleSubmit}>
-                <Typography variant='h6'>Personal Information</Typography>
-                <Box sx={{ marginLeft: 30 }}>
+            <div id="capture">
+            <Box sx={{ marginTop: 1, marginBottom:2 }} component="form" onSubmit={handleSubmit}>
+                <Typography sx={{marginLeft: 1}} variant='h6'>Personal Information</Typography>
+                <Box sx={{marginLeft: 1}}>
                     <TextField sx={{ mt: 5 }}
                         required
                         variant="outlined"
@@ -750,6 +766,8 @@ const PersonalInfo = (props) => {
 
                 </Box>
             </Box>
+            <button onClick={exportPdf}>Print</button>
+            </div>
         </Box>
     )
 }

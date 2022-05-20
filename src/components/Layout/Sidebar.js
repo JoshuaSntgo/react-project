@@ -37,11 +37,6 @@ export const facultyMenu = [
         name: 'Trainings and Programs',
         icon: <WorkspacePremiumIcon />,
         link: '/Faculty/TNP'
-    },
-    {
-        name: 'Export',
-        icon: <HomeIcon />,
-        link: '/Export'
     }
 ]
 export const adminMenu = [

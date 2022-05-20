@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updatePersonalInfo } from '../form/reducer';
 import axiosInstance from '../axios/Index';
 import { fetchFromStorage } from '../utilities/Storage';
+
+
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -112,17 +114,19 @@ const Export = (props) => {
     const handleChangeBType = (event) => {
         setbtype(event.target.value)
     }
+
     const exportPdf = () => {
 
         html2canvas(document.querySelector("#capture")).then(canvas => {
             document.body.appendChild(canvas);  // if you want see your screenshot in body.
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'pt', 'a4', false);
-            pdf.addImage(imgData, 'PNG', 0, 0, 600, 0, undefined, false);
+            const pdf = new jsPDF('p', 'pt', 'letter', false);
+            pdf.addImage(imgData, 'PNG', 0, 0, 600, 0, undefined, false); // padding left, padding top, size, 0,
             pdf.save("download.pdf");
         });
 
     }
+
     const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
         initialValues,
 
@@ -155,8 +159,8 @@ const Export = (props) => {
             <Sidebar />
             <div id="capture">
                 <Box sx={{ marginTop: 1 }} component="form" onSubmit={handleSubmit}>
-                    <Typography variant='h6'>Personal Information</Typography>
-                    <Box sx={{ marginLeft: 30 }}>
+                    <Typography sx={{ marginLeft: 2 }} variant='h6'>Personal Information</Typography>
+                    <Box sx={{ marginLeft: 2 }}>
                         <TextField sx={{ mt: 5 }}
                             required
                             variant="outlined"
@@ -771,110 +775,9 @@ const Export = (props) => {
 
                     </Box>
 
-                    <Card sx={{ padding: 5, display: 'flex' }}>
-                        <Sidebar></Sidebar>
-                        <Box sx={{ marginTop: 1 }} component="form">
-                            <Typography variant='h6'>Educational Background</Typography>
-                            <Grid container spacing={2}>
-                                {selectedUser !== null && selectedUser.userInfo.educ.educs.map((us) => (
-                                    <Grid xs={12} sm={5}>
-                                        <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4 }}>
-                                            <CardContent>
-                                                <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
-                                                    {us.schoolName}
-                                                </Typography>
-                                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                                    {us.course}
-                                                </Typography>
-                                                <Typography sx={{ mb: 1.5, marginTop: -1 }} color="text.secondary">
-                                                    {us.from.year} - {us.to.year}
-                                                </Typography>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Box>
-                    </Card>
-
-                    <Card sx={{ padding: 5, display: 'flex' }}>
-
-                        <Sidebar></Sidebar>
-                        <Box sx={{ marginTop: 1 }} component="form">
-                            <Typography variant='h6'>Civil Service Eligilibity</Typography>
-                            <Grid container spacing={2}>
-                                {selectedUser !== null && selectedUser.userInfo.civilservice.CivilData.map((us) => (
-                                    <Grid xs={12} sm={5}>
-                                        <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4 }}>
-                                            <CardContent>
-                                                <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
-                                                    {us.civilService}
-                                                </Typography>
-                                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                                    Date of Availability: {us.dateOfValidity}
-                                                </Typography>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Box>
-                    </Card>
-
-                    <Card sx={{ padding: 5, display: 'flex' }}>
-
-                        <Sidebar></Sidebar>
-                        <Box sx={{ marginTop: 1 }} component="form">
-                            <Typography variant='h6'>Work Experience</Typography>
-                            <Grid container spacing={2}>
-                                {selectedUser !== null && selectedUser.userInfo.workexp.WorkData.map((us) => (
-                                    <Grid xs={12} sm={5}>
-                                        <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4, borderStyle: 'solid' }}>
-                                            <CardContent>
-                                                <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
-                                                    {us.positionTitle}
-                                                </Typography>
-                                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                                    {us.company}
-                                                </Typography>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Box>
-                    </Card>
-
-                    <Card sx={{ padding: 5, display: 'flex' }}>
-
-                        <Sidebar></Sidebar>
-
-                        <Box sx={{ marginTop: 1 }} component="form">
-                            <Typography variant='h6'>Trainings and Programs</Typography>
-                            <Grid container spacing={2}>
-                                {selectedUser !== null && selectedUser.userInfo.trainings.TrainingData.map((us) => (
-                                    <Grid xs={12} sm={5}>
-                                        <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4 }}>
-                                            <CardContent>
-                                                <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
-                                                    {us.titleOfLearning}
-                                                </Typography>
-                                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                                    {us.type}
-                                                </Typography>
-                                                <Typography sx={{ mb: 1.5, marginTop: -1 }} color="text.secondary">
-                                                    {us.hours}
-                                                </Typography>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        </Box>
-                    </Card>
                 </Box>
-            </div>
             <button onClick={exportPdf}>Print</button>
+            </div>
         </Box>
     )
 }
