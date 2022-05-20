@@ -36,21 +36,37 @@ function WorkExp(props) {
             name:"Chayl",
             id: "2"
         },
+        {
+            name:"Josh",
+            id: "3"
+        },
+        {
+            name:"Junats",
+            id: "4"
+        },
     ]
 
     const initialValues = [
         {
-            InclusiveDate : {
-                from: user.userInfo.workexp.WorkData[0].InclusiveDate.from,
-                to: user.userInfo.workexp.WorkData[0].InclusiveDate.to,
-            },
+            from: user.userInfo.workexp.WorkData[0].InclusiveDate.from,
+            to: user.userInfo.workexp.WorkData[0].InclusiveDate.to,
             positionTitle:user.userInfo.workexp.WorkData[0].positionTitle,
             company:user.userInfo.workexp.WorkData[0].company,
             monthlySalary: user.userInfo.workexp.WorkData[0].monthlySalary,
             salary:user.userInfo.workexp.WorkData[0].salary,
             statusOfAppointment:user.userInfo.workexp.WorkData[0].statusOfAppointment,
             govtService: user.userInfo.workexp.WorkData[0].govtService
-        }
+        },
+        {
+            from: user.userInfo.workexp.WorkData[1].InclusiveDate.from,
+            to: user.userInfo.workexp.WorkData[1].InclusiveDate.to,
+            positionTitle:user.userInfo.workexp.WorkData[1].positionTitle,
+            company:user.userInfo.workexp.WorkData[1].company,
+            monthlySalary: user.userInfo.workexp.WorkData[1].monthlySalary,
+            salary:user.userInfo.workexp.WorkData[1].salary,
+            statusOfAppointment:user.userInfo.workexp.WorkData[1].statusOfAppointment,
+            govtService: user.userInfo.workexp.WorkData[1].govtService
+        },
     ]
 
     return (
@@ -60,16 +76,16 @@ function WorkExp(props) {
             <pre>{JSON.stringify(selectedUser, null, 4)}</pre>
             <Box sx={{ marginTop: 1 }} component="form">
                 <Typography variant='h6'>Work Experience</Typography>
-                {employees.map((us, key)=>(
+                {initialValues.map((us, key)=>(
                     <Grid container spacing={2} style={{marginRight: 10}}>
                         <Grid xs={12} sm={4}>
                             <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
                                 <CardContent>
                                     <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-                                        {us.name}
+                                        {us.positionTitle}
                                     </Typography>
                                     <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-                                        {us.id}
+                                        {us.company}
                                     </Typography>
                                 </CardContent>
                             </Card>

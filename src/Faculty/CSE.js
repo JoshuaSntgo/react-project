@@ -32,33 +32,6 @@ function CSE(props) {
     }, [getUser])
 
     /* End Code for getting user information */
-    const dispatch = useDispatch()
-    const { activeStep, handleBack, handleNext, steps } = props
-    const [newForm, setNewForm] = useState(false)
-    const initialValues = {
-        CivilData: []
-    }
-
-    const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
-        initialValues,
-        validationSchema: Yup.object({
-            CivilData: Yup.array().of(
-                Yup.object().shape({
-                    civilService: Yup.string().required("Civil Service is required"),
-                    dateOfExamination: Yup.date(),
-                })
-            ),
-        }),
-        onSubmit: async (values) => {
-            console.log(values)
-            dispatch(updateCivilService(values))
-            handleNext()
-        }
-    })
-    const handleAdd = (data) => {
-        setFieldValue("CivilData", [...values.CivilData, data])
-    }
-    console.log(values)
     return (
         <Card sx={{ padding: 5, display: 'flex' }}>
                     

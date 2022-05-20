@@ -32,41 +32,6 @@ function TNP(props) {
 
   /* End Code for getting user information */
   
-  const dispatch = useDispatch()
-  const { activeStep, handleBack, handleNext, steps } = props
-  const [newForm, setNewForm] = useState(false)
-  const initialValues = {
-    TrainingData: []
-  }
-
-  const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
-    initialValues,
-    validationSchema: Yup.object({
-      TrainingData: Yup.array().of(
-        Yup.object().shape({
-          titleOfLearning: Yup.string().required("Title of Learning is required"),
-          DatesOfAttendance: Yup.object({
-            from: Yup.date(),
-            to: Yup.date()
-          }),
-
-          hours: Yup.number().required(),
-          typeOfLD: Yup.string().required("Type of LD is required"),
-        })
-      ),
-    }),
-    onSubmit: async (values) => {
-      console.log(values)
-      dispatch(updateTrainings(values))
-
-      console.log(user)
-      handleNext()
-    }
-  })
-  const handleAdd = (data) => {
-    setFieldValue("TrainingData", [...values.TrainingData, data])
-  }
-  console.log(values)
   return (
     <Card sx={{ padding: 5, display: 'flex' }}>
                     
