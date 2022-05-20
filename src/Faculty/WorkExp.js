@@ -11,7 +11,9 @@ import Sidebar, { facultyMenu } from '../components/Layout/Sidebar'
 import axiosInstance from '../axios/Index';
 import { fetchFromStorage } from '../utilities/Storage';
 
-function WorkExp(props) {/* Code for getting user information */
+function WorkExp(props) {
+    
+    /*User information */
     const user = fetchFromStorage('user')
     const [selectedUser, setSelectedUser] = useState(null)
 
@@ -23,78 +25,58 @@ function WorkExp(props) {/* Code for getting user information */
     useEffect(() => {
         getUser()
     }, [getUser])
+    /* End Code*/
 
-    /* End Code for getting user information */
-    const userInfo = useSelector(state => state.userInfo)
-    const dispatch = useDispatch()
-    const { activeStep, handleBack, handleNext, steps } = props
-    const [newForm, setNewForm] = useState(false)
-    const initialValues = {
-        WorkData: []
-    }
+    const employees = [
+        {
+            name: user.userInfo.workexp.WorkData[0].positionTitle,
+            id: "1"
+        },
+        {
+            name:"Chayl",
+            id: "2"
+        },
+    ]
 
-    const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
-        initialValues,
-        validationSchema: Yup.object({
-            WorkData: Yup.array().of(
-                Yup.object().shape({
-                    positionTitle: Yup.string().required("Position Title is required"),
-                })
-            ),
-        }),
-        onSubmit: async (values) => {
-            console.log(values)
-            dispatch(updateWorkXP(values))
-            handleNext()
+    const initialValues = [
+        {
+            InclusiveDate : {
+                from: user.userInfo.workexp.WorkData[0].InclusiveDate.from,
+                to: user.userInfo.workexp.WorkData[0].InclusiveDate.to,
+            },
+            positionTitle:user.userInfo.workexp.WorkData[0].positionTitle,
+            company:user.userInfo.workexp.WorkData[0].company,
+            monthlySalary: user.userInfo.workexp.WorkData[0].monthlySalary,
+            salary:user.userInfo.workexp.WorkData[0].salary,
+            statusOfAppointment:user.userInfo.workexp.WorkData[0].statusOfAppointment,
+            govtService: user.userInfo.workexp.WorkData[0].govtService
         }
-    })
-    const handleAdd = (data) => {
-        setFieldValue("WorkData", [...values.WorkData, data])
-    }
-    console.log(values)
+    ]
+
     return (
         <Card sx={{ padding: 5, display: 'flex' }}>
                 
             <Sidebar></Sidebar>
-            
+            <pre>{JSON.stringify(selectedUser, null, 4)}</pre>
             <Box sx={{ marginTop: 1 }} component="form">
-
                 <Typography variant='h6'>Work Experience</Typography>
-
-                <Grid container spacing={2} style={{marginRight: 10}}>
-                    <Grid xs={12} sm={4}>
-                        <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
-                            <CardContent>
-                                <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-                                    {user.userInfo.workexp.WorkData[0].positionTitle}</Typography>
-                                <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                                    {user.userInfo.workexp.WorkData[0].company}
-                                </Typography>
-                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                    {user.userInfo.workexp.WorkData[0].statusOfAppointment}
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                {employees.map((us, key)=>(
+                    <Grid container spacing={2} style={{marginRight: 10}}>
+                        <Grid xs={12} sm={4}>
+                            <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
+                                <CardContent>
+                                    <Typography style={{ fontWeight: 600, fontSize: 18 }}>
+                                        {us.name}
+                                    </Typography>
+                                    <Typography style={{ fontWeight: 600, fontSize: 18 }}>
+                                        {us.id}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     </Grid>
-
-                    <Grid xs={12} sm={4}>
-                        <Card sx={{ minWidth: 700, marginLeft: 30, marginTop: 5 }}>
-                            <CardContent>
-                                <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-                                    {user.userInfo.workexp.WorkData[0].positionTitle}</Typography>
-                                <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                                    {user.userInfo.workexp.WorkData[0].company}
-                                </Typography>
-                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                    {user.userInfo.workexp.WorkData[0].statusOfAppointment}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-
-                </Grid>
+                ))}
             </Box>
-
         </Card>
     )
 }

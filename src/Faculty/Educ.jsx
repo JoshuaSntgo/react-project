@@ -66,13 +66,13 @@ function Educ(props) {
                             <CardContent>
                                 <Typography style={{ fontWeight: 600, fontSize: 18 }}>Junior High School</Typography>
                                 <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                                    {user.userInfo.educ.educs[0].schoolName}
+                                    {user.userInfo.educ.educs[1].schoolName}
                                 </Typography>
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                    {user.userInfo.educ.educs[0].course}
+                                    {user.userInfo.educ.educs[1].course}
                                 </Typography>
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                {user.userInfo.educ.educs[0].from.year} - {user.userInfo.educ.educs[0].to.year}
+                                {user.userInfo.educ.educs[1].from.year} - {user.userInfo.educ.educs[1].to.year}
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -86,13 +86,13 @@ function Educ(props) {
                             <CardContent>
                                 <Typography style={{ fontWeight: 600, fontSize: 18 }}>Senior High School</Typography>
                                 <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                                    {user.userInfo.educ.educs[0].schoolName}
+                                    {user.userInfo.educ.educs[2].schoolName}
                                 </Typography>
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                    {user.userInfo.educ.educs[0].course}
+                                    {user.userInfo.educ.educs[2].course}
                                 </Typography>
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                {user.userInfo.educ.educs[0].from.year} - {user.userInfo.educ.educs[0].to.year}
+                                {user.userInfo.educ.educs[2].from.year} - {user.userInfo.educ.educs[2].to.year}
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -103,13 +103,13 @@ function Educ(props) {
                             <CardContent>
                                 <Typography style={{ fontWeight: 600, fontSize: 18 }}>College</Typography>
                                 <Typography sx={{ mb: 1.5, marginTop: 2  }} color="text.secondary">
-                                    {user.userInfo.educ.educs[0].schoolName}
+                                    {user.userInfo.educ.educs[3].schoolName}
                                 </Typography>
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                    {user.userInfo.educ.educs[0].course}
+                                    {user.userInfo.educ.educs[3].course}
                                 </Typography>
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                {user.userInfo.educ.educs[0].from.year} - {user.userInfo.educ.educs[0].to.year}
+                                {user.userInfo.educ.educs[3].from.year} - {user.userInfo.educ.educs[3].to.year}
                                 </Typography>
                             </CardContent>
                         </Card>
