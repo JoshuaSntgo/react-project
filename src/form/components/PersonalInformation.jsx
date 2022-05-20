@@ -329,10 +329,10 @@ function PersonalInformation(props) {
               required
               labelId="btype"
               id="btype"
-              value={btype}
+              value={values.btype}
               label="Blood Type"
               size="small"
-              onChange={handleChangeBType}
+              onChange={(e) => setFieldValue("btype", e.target.value)}
             >
               <MenuItem value={'A+'}>A+</MenuItem>
               <MenuItem value={'A-'}>A-</MenuItem>

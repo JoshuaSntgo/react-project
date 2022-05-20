@@ -12,7 +12,7 @@ import axiosInstance from '../axios/Index';
 import { fetchFromStorage } from '../utilities/Storage';
 
 function WorkExp(props) {
-    
+
     /*User information */
     const user = fetchFromStorage('user')
     const [selectedUser, setSelectedUser] = useState(null)
@@ -33,15 +33,15 @@ function WorkExp(props) {
             id: "1"
         },
         {
-            name:"Chayl",
+            name: "Chayl",
             id: "2"
         },
         {
-            name:"Josh",
+            name: "Josh",
             id: "3"
         },
         {
-            name:"Junats",
+            name: "Junats",
             id: "4"
         },
     ]
@@ -50,34 +50,34 @@ function WorkExp(props) {
         {
             from: user.userInfo.workexp.WorkData[0].InclusiveDate.from,
             to: user.userInfo.workexp.WorkData[0].InclusiveDate.to,
-            positionTitle:user.userInfo.workexp.WorkData[0].positionTitle,
-            company:user.userInfo.workexp.WorkData[0].company,
+            positionTitle: user.userInfo.workexp.WorkData[0].positionTitle,
+            company: user.userInfo.workexp.WorkData[0].company,
             monthlySalary: user.userInfo.workexp.WorkData[0].monthlySalary,
-            salary:user.userInfo.workexp.WorkData[0].salary,
-            statusOfAppointment:user.userInfo.workexp.WorkData[0].statusOfAppointment,
+            salary: user.userInfo.workexp.WorkData[0].salary,
+            statusOfAppointment: user.userInfo.workexp.WorkData[0].statusOfAppointment,
             govtService: user.userInfo.workexp.WorkData[0].govtService
         },
         {
             from: user.userInfo.workexp.WorkData[1].InclusiveDate.from,
             to: user.userInfo.workexp.WorkData[1].InclusiveDate.to,
-            positionTitle:user.userInfo.workexp.WorkData[1].positionTitle,
-            company:user.userInfo.workexp.WorkData[1].company,
+            positionTitle: user.userInfo.workexp.WorkData[1].positionTitle,
+            company: user.userInfo.workexp.WorkData[1].company,
             monthlySalary: user.userInfo.workexp.WorkData[1].monthlySalary,
-            salary:user.userInfo.workexp.WorkData[1].salary,
-            statusOfAppointment:user.userInfo.workexp.WorkData[1].statusOfAppointment,
+            salary: user.userInfo.workexp.WorkData[1].salary,
+            statusOfAppointment: user.userInfo.workexp.WorkData[1].statusOfAppointment,
             govtService: user.userInfo.workexp.WorkData[1].govtService
         },
     ]
 
     return (
         <Card sx={{ padding: 5, display: 'flex' }}>
-                
+
             <Sidebar></Sidebar>
             <pre>{JSON.stringify(selectedUser, null, 4)}</pre>
             <Box sx={{ marginTop: 1 }} component="form">
                 <Typography variant='h6'>Work Experience</Typography>
-                {initialValues.map((us, key)=>(
-                    <Grid container spacing={2} style={{marginRight: 10}}>
+                {initialValues.map((us, key) => (
+                    <Grid container spacing={2} style={{ marginRight: 10 }}>
                         <Grid xs={12} sm={4}>
                             <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
                                 <CardContent>

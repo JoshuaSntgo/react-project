@@ -133,6 +133,8 @@ const PersonalInfo = (props) => {
     return (
         <Box sx={{ padding: 5, display: 'flex' }}>
             <Sidebar />
+
+            <pre>{JSON.stringify(selectedUser, null, 4)}</pre> will print all the data
             <Box sx={{ marginTop: 1 }} component="form" onSubmit={handleSubmit}>
                 <Typography variant='h6'>Personal Information</Typography>
                 <Box sx={{ marginLeft: 30 }}>
