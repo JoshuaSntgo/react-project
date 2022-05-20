@@ -37,20 +37,20 @@ function TNP(props) {
 
             <Sidebar></Sidebar>
             <Box sx={{ marginTop: 1 }} component="form">
-                <Typography variant='h6'>Educational Background</Typography>
-                {selectedUser !== null && selectedUser.userInfo.educ.educs.map((us) => (
+                <Typography variant='h6'>Trainings and Programs</Typography>
+                {selectedUser !== null && selectedUser.userInfo.trainings.TrainingData.map((us) => (
                     <Grid container spacing={2} style={{ marginRight: 10 }}>
                         <Grid xs={12} sm={4}>
                             <Card sx={{ minWidth: 700, marginLeft: 3, marginTop: 5 }}>
                                 <CardContent>
                                     <Typography sx={{ mb: 1.5, marginTop: 2 }} color="text.secondary">
-                                        {us.schoolName}
+                                        {us.titleOfLearning}
                                     </Typography>
                                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                        {us.course}
+                                        {us.type}
                                     </Typography>
                                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                        {us.from.year} - {us.to.year}
+                                        {us.hours}
                                     </Typography>
                                 </CardContent>
                             </Card>

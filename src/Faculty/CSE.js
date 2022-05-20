@@ -37,7 +37,7 @@ function CSE(props) {
 
             <Sidebar></Sidebar>
             <Box sx={{ marginTop: 1 }} component="form">
-                <Typography variant='h6'>Educational Background</Typography>
+                <Typography variant='h6'>Civil Service Eligibility</Typography>
                 {selectedUser !== null && selectedUser.userInfo.civilservice.CivilData.map((us) => (
                     <Grid container spacing={2} style={{ marginRight: 10 }}>
                         <Grid xs={12} sm={4}>

@@ -1,4 +1,4 @@
-import { Add, Edit } from '@mui/icons-material'
+import { Add, Delete, Edit } from '@mui/icons-material'
 import { Box, Button, Card, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
@@ -10,58 +10,61 @@ import { updateCivilService } from '../reducer';
 
 
 const currentYear = (new Date()).getFullYear();
-const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
+const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + (i * step));
 
 function CivilService(props) {
     const user = useSelector(state => state.userInfo)
     const dispatch = useDispatch()
-    const {activeStep, handleBack, handleNext, steps} = props
+    const { activeStep, handleBack, handleNext, steps } = props
     const [newForm, setNewForm] = useState(false)
     const initialValues = {
-        CivilData : []
+        CivilData: []
     }
 
-    const {values, errors, touched, handleSubmit, handleChange, setFieldValue} = useFormik({
+    const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
         initialValues,
         validationSchema: Yup.object({
-          CivilData: Yup.array().of(
-              Yup.object().shape({
-                civilService: Yup.string().required("Civil Service is required"),
-                dateOfExamination: Yup.date(),
-              })
-          ),
+            CivilData: Yup.array().of(
+                Yup.object().shape({
+                    civilService: Yup.string().required("Civil Service is required"),
+                    dateOfExamination: Yup.date(),
+                })
+            ),
         }),
         onSubmit: async (values) => {
-          console.log(values)
-          dispatch(updateCivilService(values))
-          handleNext()
+            console.log(values)
+            dispatch(updateCivilService(values))
+            handleNext()
         }
     })
     const handleAdd = (data) => {
         setFieldValue("CivilData", [...values.CivilData, data])
     }
+    const handleRemove = (index) => {
+        setFieldValue("educs", [...values.educs].filter((a, i) => i !== index))
+    }
     console.log(values)
     return (
-        <Box sx={{padding: 5,}}>
-            <div style={{display: 'flex', alignItems: "center", justifyContent: 'space-between'}}>
+        <Box sx={{ padding: 5, }}>
+            <div style={{ display: 'flex', alignItems: "center", justifyContent: 'space-between' }}>
                 <div>
-                    <Typography style={{fontWeight: 600, fontSize: 18}}>Civil Service Eligibility</Typography>
-                    <Typography style={{color: '#b4b4b4', fontSize: 15}}>Please complete the information below. If the field is not applicable, type N/A</Typography>
+                    <Typography style={{ fontWeight: 600, fontSize: 18 }}>Civil Service Eligibility</Typography>
+                    <Typography style={{ color: '#b4b4b4', fontSize: 15 }}>Please complete the information below. If the field is not applicable, type N/A</Typography>
                 </div>
                 <Button size="small" color="primary" variant="contained" startIcon={<Add />} onClick={() => setNewForm(true)}>Add Eligibility</Button>
             </div>
-            <Box sx={{marginTop: 5}} component="form" onSubmit={handleSubmit}>
+            <Box sx={{ marginTop: 5 }} component="form" onSubmit={handleSubmit}>
                 {values.CivilData.map((civil_data, index) => (
-                    <Card key={index} sx={{padding: 2, marginBottom:5}}>
-                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <Card key={index} sx={{ padding: 2, marginBottom: 5 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <div>
-                                <Typography style={{fontWeight: 700, fontSize: 16}}>{civil_data.civilService}</Typography>
-                                <Typography style={{fontSize: 14, color: '#b4b4b4'}}>{civil_data.rating}</Typography>
+                                <Typography style={{ fontWeight: 700, fontSize: 16 }}>{civil_data.civilService}</Typography>
+                                <Typography style={{ fontSize: 14, color: '#b4b4b4' }}>{civil_data.rating}</Typography>
 
                             </div>
-                            <IconButton onClick={() => console.log(civil_data)}><Edit /></IconButton>
+                            <IconButton onClick={() => handleRemove(index)}><Delete /></IconButton>
                         </div>
-                        
+
                     </Card>
                 ))}
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -71,7 +74,7 @@ function CivilService(props) {
                         onClick={handleBack}
                         sx={{ mr: 1 }}
                     >
-                    Back
+                        Back
                     </Button>
                     <Box sx={{ flex: '1 1 auto' }} />
                     <Button type="submit">
@@ -86,18 +89,18 @@ function CivilService(props) {
     )
 }
 
-const CivilServiceForm = ({open, onClose, handleAdd}) => {
+const CivilServiceForm = ({ open, onClose, handleAdd }) => {
 
     const initialValues = {
-        civilService: "", 
+        civilService: "",
         rating: "",
         dateOfExamination: new Date(),
-        placeOfExamination:"",
+        placeOfExamination: "",
         dateOfValidity: new Date(),
-        number:""
+        number: ""
     }
-    const {values, handleSubmit, errors, handleChange, touched, setFieldValue}  = useFormik({
-        initialValues, 
+    const { values, handleSubmit, errors, handleChange, touched, setFieldValue } = useFormik({
+        initialValues,
         validationSchema: Yup.object({
             civilService: Yup.string().required("This field is required"),
             dateOfExamination: Yup.date()
@@ -110,15 +113,15 @@ const CivilServiceForm = ({open, onClose, handleAdd}) => {
     })
     return (
         <Dialog open={open} onClose={onClose} maxWidth='md' fullWidth component="form" onSubmit={handleSubmit}>
-            <DialogTitle style={{marginTop: 15, fontWeight: 600, fontSize: 18}}>Add Eligibility</DialogTitle>
+            <DialogTitle style={{ marginTop: 15, fontWeight: 600, fontSize: 18 }}>Add Eligibility</DialogTitle>
             <DialogContent>
-                <TextField required style={{marginTop: 5}} fullWidth size="small" label="Civil Service Eligibility (Board/Bar, CES, etc..)" placeholder='Civil Service Eligibility (Board/Bar, CES, etc..)' value={values.civilService} name="civilService" onChange={handleChange} 
+                <TextField required style={{ marginTop: 5 }} fullWidth size="small" label="Civil Service Eligibility (Board/Bar, CES, etc..)" placeholder='Civil Service Eligibility (Board/Bar, CES, etc..)' value={values.civilService} name="civilService" onChange={handleChange}
                     error={Boolean(errors.civilService || touched.civilService)}
-                    helperText={errors.civilService} 
+                    helperText={errors.civilService}
                 />
-                <TextField style={{marginTop: 20}}  fullWidth size="small" label="Rating (if applicable)" placeholder='Rating (if applicable)' value={values.rating} name="rating" onChange={handleChange} 
+                <TextField style={{ marginTop: 20 }} fullWidth size="small" label="Rating (if applicable)" placeholder='Rating (if applicable)' value={values.rating} name="rating" onChange={handleChange}
                 />
-                <Box sx={{marginTop: 3, display: 'flex', flexDirection:'row'}}>
+                <Box sx={{ marginTop: 3, display: 'flex', flexDirection: 'row' }}>
 
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
@@ -126,36 +129,36 @@ const CivilServiceForm = ({open, onClose, handleAdd}) => {
                             value={values.dateOfExamination}
                             name="dateOfExamination"
                             onChange={(n) => setFieldValue("dateOfExamination", n)}
-                            renderInput={(params) => <TextField {...params} size="small" fullWidth/>}
+                            renderInput={(params) => <TextField {...params} size="small" fullWidth />}
                         />
                     </LocalizationProvider>
-                    
-                    <TextField 
+
+                    <TextField
                         required
-                        style={{marginLeft:5}} 
+                        style={{ marginLeft: 5 }}
                         fullWidth size="small"
                         label="Place of Examination"
                         placeholder='Place of Examination'
                         value={values.placeOfExamination}
                         name="placeOfExamination"
-                        onChange={handleChange} 
+                        onChange={handleChange}
                     />
-                
+
                 </Box>
 
 
-                <Typography style={{marginTop: 20, fontWeight: 600, fontSize: 18}}>License (if applicable)</Typography>
+                <Typography style={{ marginTop: 20, fontWeight: 600, fontSize: 18 }}>License (if applicable)</Typography>
 
-                <Box sx={{marginTop: 3, display: 'flex', flexDirection:'row'}}>
+                <Box sx={{ marginTop: 3, display: 'flex', flexDirection: 'row' }}>
 
-                    <TextField 
+                    <TextField
                         fullWidth size="small"
                         label="Number"
-                        style={{marginRight:5}} 
+                        style={{ marginRight: 5 }}
                         placeholder='Number'
                         value={values.number}
                         name="number"
-                        onChange={handleChange} 
+                        onChange={handleChange}
                     />
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
@@ -163,7 +166,7 @@ const CivilServiceForm = ({open, onClose, handleAdd}) => {
                             value={values.dateOfValidity}
                             name="dateOfValidity"
                             onChange={(n) => setFieldValue("dateOfValidity", n)}
-                            renderInput={(params) => <TextField {...params} size="small" fullWidth/>}
+                            renderInput={(params) => <TextField {...params} size="small" fullWidth />}
                         />
                     </LocalizationProvider>
 

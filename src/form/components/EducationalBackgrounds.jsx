@@ -1,4 +1,4 @@
-import { Add, Edit } from '@mui/icons-material'
+import { Add, Delete, Edit } from '@mui/icons-material'
 import { Box, Button, Card, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
@@ -22,68 +22,71 @@ const months = [
 ]
 
 const currentYear = (new Date()).getFullYear();
-const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
+const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + (i * step));
 
 function EducationalBackgrounds(props) {
     const user = useSelector(state => state.userInfo)
     const dispatch = useDispatch()
-    const {activeStep, handleBack, handleNext, steps} = props
+    const { activeStep, handleBack, handleNext, steps } = props
     const [newForm, setNewForm] = useState(false)
     const initialValues = {
-        educs : []
+        educs: []
     }
 
-    const {values, errors, touched, handleSubmit, handleChange, setFieldValue} = useFormik({
+    const { values, errors, touched, handleSubmit, handleChange, setFieldValue } = useFormik({
         initialValues,
         validationSchema: Yup.object({
-          educs: Yup.array().of(
-              Yup.object().shape({
-                schoolName: Yup.string().required("School Name is required"),
-                course: Yup.string().required("Course is required"), 
-                from: Yup.object({
-                    month: Yup.string().required(), 
-                    year:Yup.string().required(), 
-                }),
-                to: Yup.object({
-                    month: Yup.string().required(), 
-                    year:Yup.string().required(), 
-                }),
-                unitsEarned: Yup.number().required(), 
-                awards: Yup.string()
-              })
-          ),
+            educs: Yup.array().of(
+                Yup.object().shape({
+                    schoolName: Yup.string().required("School Name is required"),
+                    course: Yup.string().required("Course is required"),
+                    from: Yup.object({
+                        month: Yup.string().required(),
+                        year: Yup.string().required(),
+                    }),
+                    to: Yup.object({
+                        month: Yup.string().required(),
+                        year: Yup.string().required(),
+                    }),
+                    unitsEarned: Yup.number().required(),
+                    awards: Yup.string()
+                })
+            ),
         }),
         onSubmit: async (values) => {
-          console.log(values)
-          dispatch(updateEducs(values))
-          handleNext()
+            console.log(values)
+            dispatch(updateEducs(values))
+            handleNext()
         }
     })
     const handleAdd = (data) => {
         setFieldValue("educs", [...values.educs, data])
     }
+    const handleRemove = (index) => {
+        setFieldValue("educs", [...values.educs].filter((a, i) => i !== index))
+    }
     console.log(values)
     return (
-        <Box sx={{padding: 5,}}>
-            <div style={{display: 'flex', alignItems: "center", justifyContent: 'space-between'}}>
+        <Box sx={{ padding: 5, }}>
+            <div style={{ display: 'flex', alignItems: "center", justifyContent: 'space-between' }}>
                 <div>
-                    <Typography style={{fontWeight: 600, fontSize: 18}}>Educational Background</Typography>
-                    <Typography style={{color: '#b4b4b4', fontSize: 15}}>Please complete the information below. If the field is not applicable, type N/A</Typography>
+                    <Typography style={{ fontWeight: 600, fontSize: 18 }}>Educational Background</Typography>
+                    <Typography style={{ color: '#b4b4b4', fontSize: 15 }}>Please complete the information below. If the field is not applicable, type N/A</Typography>
                 </div>
                 <Button size="small" color="primary" variant="contained" startIcon={<Add />} onClick={() => setNewForm(true)}>Add Education</Button>
             </div>
-            <Box sx={{marginTop: 5}} component="form" onSubmit={handleSubmit}>
+            <Box sx={{ marginTop: 5 }} component="form" onSubmit={handleSubmit}>
                 {values.educs.map((educ, index) => (
-                    <Card key={index} sx={{padding: 2, marginBottom:5}}>
-                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <Card key={index} sx={{ padding: 2, marginBottom: 5 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <div>
-                                <Typography style={{fontWeight: 700, fontSize: 16}}>{educ.schoolName}</Typography>
-                                <Typography style={{fontSize: 14, color: '#b4b4b4'}}>{educ.course}</Typography>
-                                <Typography style={{fontSize: 11, color: '#b4b4b4'}}>{educ.from.year} - {educ.to.year}</Typography>
+                                <Typography style={{ fontWeight: 700, fontSize: 16 }}>{educ.schoolName}</Typography>
+                                <Typography style={{ fontSize: 14, color: '#b4b4b4' }}>{educ.course}</Typography>
+                                <Typography style={{ fontSize: 11, color: '#b4b4b4' }}>{educ.from.year} - {educ.to.year}</Typography>
                             </div>
-                            <IconButton onClick={() => console.log(educ)}><Edit /></IconButton>
+                            <IconButton onClick={() => handleRemove(index)}><Delete /></IconButton>
                         </div>
-                        
+
                     </Card>
                 ))}
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -93,7 +96,7 @@ function EducationalBackgrounds(props) {
                         onClick={handleBack}
                         sx={{ mr: 1 }}
                     >
-                    Back
+                        Back
                     </Button>
                     <Box sx={{ flex: '1 1 auto' }} />
                     <Button type="submit">
@@ -108,36 +111,36 @@ function EducationalBackgrounds(props) {
     )
 }
 
-const NewEducationForm = ({open, onClose, handleAdd}) => {
+const NewEducationForm = ({ open, onClose, handleAdd }) => {
 
     const initialValues = {
-        schoolName: "", 
+        schoolName: "",
         course: "",
-        from : {
-            month: "June", 
+        from: {
+            month: "June",
             year: "2016"
         },
         to: {
-            month: "June", 
+            month: "June",
             year: "2016"
         },
-        unitsEarned: 0, 
+        unitsEarned: 0,
         awards: ""
     }
-    const {values, handleSubmit, errors, handleChange, touched, setFieldValue}  = useFormik({
-        initialValues, 
+    const { values, handleSubmit, errors, handleChange, touched, setFieldValue } = useFormik({
+        initialValues,
         validationSchema: Yup.object({
             schoolName: Yup.string().required("School Name is required"),
-            course: Yup.string().required("Course is required"), 
+            course: Yup.string().required("Course is required"),
             from: Yup.object({
-                month: Yup.string().required(), 
-                year:Yup.string().required(), 
+                month: Yup.string().required(),
+                year: Yup.string().required(),
             }),
             to: Yup.object({
-                month: Yup.string().required(), 
-                year:Yup.string().required(), 
+                month: Yup.string().required(),
+                year: Yup.string().required(),
             }),
-            unitsEarned: Yup.number().required(), 
+            unitsEarned: Yup.number().required(),
             awards: Yup.string()
         }),
         onSubmit: (values) => {
@@ -151,19 +154,19 @@ const NewEducationForm = ({open, onClose, handleAdd}) => {
         <Dialog open={open} onClose={onClose} maxWidth='md' fullWidth component="form" onSubmit={handleSubmit}>
             <DialogTitle>Add Education</DialogTitle>
             <DialogContent>
-                <TextField required style={{marginTop: 20}} fullWidth size="small" label="School" placeholder='School' value={values.schoolName} name="schoolName" onChange={handleChange} 
+                <TextField required style={{ marginTop: 20 }} fullWidth size="small" label="School" placeholder='School' value={values.schoolName} name="schoolName" onChange={handleChange}
                     error={Boolean(errors.schoolName || touched.schoolName)}
-                    helperText={errors.schoolName} 
+                    helperText={errors.schoolName}
                 />
-                <TextField required style={{marginTop: 20}}  fullWidth size="small" label="Course" placeholder='Course' value={values.course} name="course" onChange={handleChange} 
+                <TextField required style={{ marginTop: 20 }} fullWidth size="small" label="Course" placeholder='Course' value={values.course} name="course" onChange={handleChange}
                     error={Boolean(errors.course || touched.course)}
-                    helperText={errors.course} 
+                    helperText={errors.course}
                 />
-                <TextField required style={{marginTop: 20}}  fullWidth size="small" label="Units Earned" placeholder='Units Earned' value={values.unitsEarned} name="unitsEarned" onChange={handleChange} 
+                <TextField required style={{ marginTop: 20 }} fullWidth size="small" label="Units Earned" placeholder='Units Earned' value={values.unitsEarned} name="unitsEarned" onChange={handleChange}
                     error={Boolean(errors.unitsEarned || touched.unitsEarned)}
-                    helperText={errors.unitsEarned} 
+                    helperText={errors.unitsEarned}
                 />
-                <Typography style={{marginTop: 20, fontSize: 14}}>Start Date</Typography>
+                <Typography style={{ marginTop: 20, fontSize: 14 }}>Start Date</Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <FormControl fullWidth size="small">
@@ -184,7 +187,7 @@ const NewEducationForm = ({open, onClose, handleAdd}) => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                <Typography style={{marginTop: 20, fontSize: 14}}>End Date</Typography>
+                <Typography style={{ marginTop: 20, fontSize: 14 }}>End Date</Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <FormControl fullWidth size="small">
@@ -205,11 +208,11 @@ const NewEducationForm = ({open, onClose, handleAdd}) => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                <TextField style={{marginTop: 20}}  fullWidth size="small" label="Awards" placeholder='Awards' value={values.awards} name="awards" onChange={handleChange} 
+                <TextField style={{ marginTop: 20 }} fullWidth size="small" label="Awards" placeholder='Awards' value={values.awards} name="awards" onChange={handleChange}
                     error={Boolean(errors.awards || touched.awards)}
-                    helperText={errors.awards} 
+                    helperText={errors.awards}
                 />
-                
+
             </DialogContent>
             <DialogActions>
                 <Button size="small" variant='outlined' color="primary" onClick={onClose}>Cancel</Button>
