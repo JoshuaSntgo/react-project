@@ -11,6 +11,9 @@ import Sidebar, { facultyMenu } from '../components/Layout/Sidebar'
 import axiosInstance from '../axios/Index';
 import { fetchFromStorage } from '../utilities/Storage';
 
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+
 function WorkExp(props) {
 
     /*User information */
@@ -22,6 +25,16 @@ function WorkExp(props) {
         setSelectedUser(data.user)
     }, [])
 
+    const exportPdf = () => {
+
+        html2canvas(document.querySelector("#capture")).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'pt', 'letter', false);
+            pdf.addImage(imgData, 'PNG', 0, 0, 500, 0, undefined, false); // padding left, padding top, size, 0,
+            pdf.save(user.userInfo.personalInformation.lastName + "_" + user.userInfo.personalInformation.firstName + "_" + "Work Experience.pdf");
+        });
+
+    }
     useEffect(() => {
         getUser()
     }, [getUser])
@@ -31,25 +44,28 @@ function WorkExp(props) {
         <Card sx={{ padding: 5, display: 'flex' }}>
 
             <Sidebar></Sidebar>
-            <Box sx={{ marginTop: 1 }} component="form">
-                <Typography variant='h6'>Work Experience</Typography>
-                <Grid container spacing={2}>
-                    {selectedUser !== null && selectedUser.userInfo.workexp.WorkData.map((us) => (
-                        <Grid xs={12} sm={5}>
-                            <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4, borderStyle: 'solid' }}>
-                                <CardContent>
-                                    <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
-                                        {us.positionTitle}
-                                    </Typography>
-                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                        {us.company}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+            <div id="capture">
+                <Box sx={{ marginTop: 1 }} component="form">
+                    <Typography variant='h6'>Work Experience</Typography>
+                    <Grid container spacing={2}>
+                        {selectedUser !== null && selectedUser.userInfo.workexp.WorkData.map((us) => (
+                            <Grid xs={12} sm={5}>
+                                <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4, borderStyle: 'solid' }}>
+                                    <CardContent>
+                                        <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
+                                            {us.positionTitle}
+                                        </Typography>
+                                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                            {us.company}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+                <button onClick={exportPdf}>Print</button>
+            </div >
         </Card>
     )
 }

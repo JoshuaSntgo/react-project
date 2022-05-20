@@ -12,6 +12,9 @@ import Sidebar, { facultyMenu } from '../components/Layout/Sidebar'
 import axiosInstance from '../axios/Index';
 import { fetchFromStorage } from '../utilities/Storage';
 
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+
 const currentYear = (new Date()).getFullYear();
 const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + (i * step));
 
@@ -26,6 +29,16 @@ function TNP(props) {
         setSelectedUser(data.user)
     }, [])
 
+    const exportPdf = () => {
+
+        html2canvas(document.querySelector("#capture")).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'pt', 'letter', false);
+            pdf.addImage(imgData, 'PNG', 0, 0, 500, 0, undefined, false); // padding left, padding top, size, 0,
+            pdf.save(user.userInfo.personalInformation.lastName + "_" + user.userInfo.personalInformation.firstName + "_" + "Trainings and Programs.pdf");
+        });
+
+    }
     useEffect(() => {
         getUser()
     }, [getUser])
@@ -37,28 +50,31 @@ function TNP(props) {
 
             <Sidebar></Sidebar>
 
-            <Box sx={{ marginTop: 1 }} component="form">
-                <Typography variant='h6'>Trainings and Programs</Typography>
-                <Grid container spacing={2}>
-                    {selectedUser !== null && selectedUser.userInfo.trainings.TrainingData.map((us) => (
-                        <Grid xs={12} sm={5}>
-                            <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4 }}>
-                                <CardContent>
-                                    <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
-                                        {us.titleOfLearning}
-                                    </Typography>
-                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                        {us.type}
-                                    </Typography>
-                                    <Typography sx={{ mb: 1.5, marginTop: -1 }} color="text.secondary">
-                                        {us.hours}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+            <div id="capture">
+                <Box sx={{ marginTop: 1 }} component="form">
+                    <Typography variant='h6'>Trainings and Programs</Typography>
+                    <Grid container spacing={2}>
+                        {selectedUser !== null && selectedUser.userInfo.trainings.TrainingData.map((us) => (
+                            <Grid xs={12} sm={5}>
+                                <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4 }}>
+                                    <CardContent>
+                                        <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
+                                            {us.titleOfLearning}
+                                        </Typography>
+                                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                            {us.type}
+                                        </Typography>
+                                        <Typography sx={{ mb: 1.5, marginTop: -1 }} color="text.secondary">
+                                            {us.hours}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+                <button onClick={exportPdf}>Print</button>
+            </div >
         </Card>
     )
 }
