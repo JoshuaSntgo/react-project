@@ -38,8 +38,8 @@ function Educ(props) {
 
         html2canvas(document.querySelector("#capture")).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'pt', 'letter', false);
-            pdf.addImage(imgData, 'PNG', 0, 0, 500, 0, undefined, false); // padding left, padding top, size, 0,
+            const pdf = new jsPDF('l', 'pt', 'letter', false);
+            pdf.addImage(imgData, 'PNG', 0, 0, 800, 0, undefined, false); // padding left, padding top, size, 0,
             pdf.save(user.userInfo.personalInformation.lastName + "_" + user.userInfo.personalInformation.firstName + "_" + "Educational Background.pdf");
         });
 
@@ -56,7 +56,7 @@ function Educ(props) {
             <Sidebar></Sidebar>
             <div id="capture">
                 <Box sx={{ marginTop: 1 }} component="form">
-                    <Typography variant='h6'>Educational Background</Typography>
+                    <Typography variant='h6' sx={{ marginLeft: 18 }}>Educational Background</Typography>
                     <Grid container spacing={2}>
                         {selectedUser !== null && selectedUser.userInfo.educ.educs.map((us) => (
                             <Grid xs={12} sm={5}>
@@ -77,7 +77,7 @@ function Educ(props) {
                         ))}
                     </Grid>
                 </Box>
-                <button onClick={exportPdf}>Print</button>
+                <Button variant="outlined" onClick={exportPdf} sx={{ marginLeft: 18, marginTop:5 }}>Print</Button>
             </div >
         </Card>
     )

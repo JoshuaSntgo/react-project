@@ -40,12 +40,7 @@ const PersonalInfo = (props) => {
 
     const userInfo = useSelector(state => state.userInfo)
     const dispatch = useDispatch()
-    const Civil_Status = [
-        "Single",
-        "In a Relationship",
-        "Married",
-        "Divorced"
-    ]
+
 
     const { activeStep, handleBack, handleNext, steps } = props
 
@@ -112,8 +107,8 @@ const PersonalInfo = (props) => {
         html2canvas(document.querySelector("#capture")).then(canvas => {
             const imgData = canvas.toDataURL('image/JPEG');
             const pdf = new jsPDF('p', 'pt', 'letter', false);
-            pdf.addImage(imgData, 'JPEG', 0, 0, 2000, 0, undefined, false); // padding left, padding top, size, 0,
-            pdf.save("Personal Info.pdf");
+            pdf.addImage(imgData, 'JPEG', 0, 0, 600, 0, undefined, false); // padding left, padding top, size, 0,
+            pdf.save(user.userInfo.personalInformation.lastName + "_" + user.userInfo.personalInformation.firstName + "_" + "Personal Info.pdf");
         });
 
     }
@@ -766,7 +761,7 @@ const PersonalInfo = (props) => {
 
                     </Box>
                 </Box>
-                <button onClick={exportPdf}>Print</button>
+                <Button variant="outlined" onClick={exportPdf}>Print</Button>
             </div>
         </Box>
     )

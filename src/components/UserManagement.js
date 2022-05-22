@@ -97,7 +97,7 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
     return (
 
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-            <DialogTitle>User Information</DialogTitle>
+            <DialogTitle>Faculty Information</DialogTitle>
             <Grid xs={12} sx={{ mb: 2, p: 2 }}>
                 <Stack direction="row" spacing={2}>
                     <TextField
@@ -127,9 +127,8 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
                     />
                 </Stack>
             </Grid>
-            <Grid xs={12} sx={{ p: 2 }}>
+            <Grid xs={12} sx={{ p: 2, marginTop:-2}}>
                 <TextField
-
                     variant="outlined"
                     size="small"
                     fullWidth
@@ -143,10 +142,10 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
             </Grid>
 
             <DialogActions>
-                <Button variant='outlined' onClick={onClose}>Close</Button>
+                <Button variant='outlined' onClick={onClose} sx={{marginTop:1, marginBottom:1}}>Close</Button>
                 {user.isConfirmed 
-                    ? <Button variant="contained" color="warning" onClick={handleDisapprove}>Remove Access</Button>
-                    : <Button variant="contained" color="warning" disabled={user.isConfirmed} onClick={handleApprove}>Approve</Button>
+                    ? <Button variant="contained" color="warning" onClick={handleDisapprove} sx={{marginTop:1, marginBottom:1}}>Remove Access</Button>
+                    : <Button variant="contained" color="warning" disabled={user.isConfirmed} onClick={handleApprove} sx={{marginTop:1, marginBottom:1}}>Approve</Button>
 
                 }
             </DialogActions>

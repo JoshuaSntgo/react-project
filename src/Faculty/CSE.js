@@ -34,8 +34,8 @@ function CSE(props) {
 
         html2canvas(document.querySelector("#capture")).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'pt', 'letter', false);
-            pdf.addImage(imgData, 'PNG', 0, 0, 500, 0, undefined, false); // padding left, padding top, size, 0,
+            const pdf = new jsPDF('l', 'pt', 'letter', false);
+            pdf.addImage(imgData, 'PNG', 0, 0, 800, 0, undefined, false); // padding left, padding top, size, 0,
             pdf.save(user.userInfo.personalInformation.lastName + "_" + user.userInfo.personalInformation.firstName + "_" + "Civil Service Eligibility.pdf");
         });
 
@@ -51,7 +51,7 @@ function CSE(props) {
             <Sidebar></Sidebar>
             <div id="capture">
                 <Box sx={{ marginTop: 1 }} component="form">
-                    <Typography variant='h6'>Civil Service Eligilibity</Typography>
+                    <Typography variant='h6' sx={{ marginLeft: 18 }}>Civil Service Eligilibity</Typography>
                     <Grid container spacing={2}>
                         {selectedUser !== null && selectedUser.userInfo.civilservice.CivilData.map((us) => (
                             <Grid xs={12} sm={5}>
@@ -69,7 +69,7 @@ function CSE(props) {
                         ))}
                     </Grid>
                 </Box>
-                <button onClick={exportPdf}>Print</button>
+                <Button variant="outlined" onClick={exportPdf} sx={{ marginLeft: 18, marginTop:5 }}>Print</Button>
             </div >
         </Card>
     )

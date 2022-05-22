@@ -1,5 +1,5 @@
 import { Add, Edit } from '@mui/icons-material'
-import { Box, Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogTitle, Radio, RadioGroup, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, InputLabel, Dialog, DialogActions, DialogContent, DialogTitle, Radio, RadioGroup, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState, useEffect } from 'react'
 import { DatePicker, LocalizationProvider } from '@mui/lab';
@@ -52,7 +52,7 @@ function TNP(props) {
 
             <div id="capture">
                 <Box sx={{ marginTop: 1 }} component="form">
-                    <Typography variant='h6'>Trainings and Programs</Typography>
+                    <Typography variant='h6' sx={{ marginLeft: 18 }}>Trainings and Programs</Typography>
                     <Grid container spacing={2}>
                         {selectedUser !== null && selectedUser.userInfo.trainings.TrainingData.map((us) => (
                             <Grid xs={12} sm={5}>
@@ -65,7 +65,7 @@ function TNP(props) {
                                             {us.type}
                                         </Typography>
                                         <Typography sx={{ mb: 1.5, marginTop: -1 }} color="text.secondary">
-                                            {us.hours}
+                                            Hours: {us.hours}
                                         </Typography>
                                     </CardContent>
                                 </Card>
@@ -73,7 +73,7 @@ function TNP(props) {
                         ))}
                     </Grid>
                 </Box>
-                <button onClick={exportPdf}>Print</button>
+                <Button variant="outlined" onClick={exportPdf} sx={{ marginLeft: 18, marginTop:5 }}>Print</Button>
             </div >
         </Card>
     )
