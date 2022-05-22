@@ -143,8 +143,8 @@ const PersonalInfo = (props) => {
     return (
         <Box sx={{ padding: 5, display: 'flex' }}>
             <Sidebar />
-            <div id="capture">
-                <Box sx={{ marginTop: 1, marginBottom: 2 }} component="form" onSubmit={handleSubmit}>
+            <Box sx={{ marginTop: 1, marginBottom: 2 }} component="form" onSubmit={handleSubmit}>
+                <div id="capture">
                     <Typography sx={{ marginLeft: 1 }} variant='h6'>Personal Information</Typography>
                     <Box sx={{ marginLeft: 1 }}>
                         <TextField sx={{ mt: 5 }}
@@ -760,9 +760,9 @@ const PersonalInfo = (props) => {
                         </Box>
 
                     </Box>
-                </Box>
+                </div>
                 <Button variant="outlined" onClick={exportPdf}>Print</Button>
-            </div>
+            </Box>
         </Box>
     )
 }

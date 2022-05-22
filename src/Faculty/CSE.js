@@ -49,8 +49,8 @@ function CSE(props) {
         <Card sx={{ padding: 5, display: 'flex' }}>
 
             <Sidebar></Sidebar>
-            <div id="capture">
-                <Box sx={{ marginTop: 1 }} component="form">
+            <Box sx={{ marginTop: 1 }} component="form">
+                <div id="capture">
                     <Typography variant='h6' sx={{ marginLeft: 18 }}>Civil Service Eligilibity</Typography>
                     <Grid container spacing={2}>
                         {selectedUser !== null && selectedUser.userInfo.civilservice.CivilData.map((us) => (
@@ -68,9 +68,9 @@ function CSE(props) {
                             </Grid>
                         ))}
                     </Grid>
-                </Box>
-                <Button variant="outlined" onClick={exportPdf} sx={{ marginLeft: 18, marginTop:5 }}>Print</Button>
-            </div >
+                </div >
+                <Button variant="outlined" onClick={exportPdf} sx={{ marginLeft: 18, marginTop: 5 }}>Print</Button>
+            </Box>
         </Card>
     )
 }

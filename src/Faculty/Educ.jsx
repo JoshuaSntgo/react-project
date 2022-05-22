@@ -54,14 +54,17 @@ function Educ(props) {
     return (
         <Card sx={{ padding: 5, display: 'flex' }}>
             <Sidebar></Sidebar>
-            <div id="capture">
-                <Box sx={{ marginTop: 1 }} component="form">
+            <Box sx={{ marginTop: 1 }} component="form">
+                <div id="capture">
                     <Typography variant='h6' sx={{ marginLeft: 18 }}>Educational Background</Typography>
                     <Grid container spacing={2}>
                         {selectedUser !== null && selectedUser.userInfo.educ.educs.map((us) => (
                             <Grid xs={12} sm={5}>
                                 <Card sx={{ minWidth: 600, marginLeft: 20, marginTop: 5, borderRadius: 4 }}>
                                     <CardContent>
+                                        <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
+                                            {us.educationalLevel.toUpperCase()}
+                                        </Typography>
                                         <Typography style={{ fontWeight: 600, fontSize: 18, marginTop: 5 }}>
                                             {us.schoolName}
                                         </Typography>
@@ -76,9 +79,9 @@ function Educ(props) {
                             </Grid>
                         ))}
                     </Grid>
-                </Box>
-                <Button variant="outlined" onClick={exportPdf} sx={{ marginLeft: 18, marginTop:5 }}>Print</Button>
-            </div >
+                </div >
+                <Button variant="outlined" onClick={exportPdf} sx={{ marginLeft: 18, marginTop: 5 }}>Print</Button>
+            </Box>
         </Card>
     )
 }

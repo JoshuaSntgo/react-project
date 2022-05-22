@@ -1,5 +1,5 @@
 import { Add, Delete, Edit } from '@mui/icons-material'
-import { Box, Button, Card, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, Dialog, DialogActions,InputLabel, DialogContent, DialogTitle, FormControl, FormControlLabel, Grid, IconButton, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -80,6 +80,7 @@ function EducationalBackgrounds(props) {
                     <Card key={index} sx={{ padding: 2, marginBottom: 5 }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <div>
+                                <Typography style={{ fontWeight: 700, fontSize: 20 }}>{educ.educationalLevel.toUpperCase()}</Typography>
                                 <Typography style={{ fontWeight: 700, fontSize: 16 }}>{educ.schoolName}</Typography>
                                 <Typography style={{ fontSize: 14, color: '#b4b4b4' }}>{educ.course}</Typography>
                                 <Typography style={{ fontSize: 11, color: '#b4b4b4' }}>{educ.from.year} - {educ.to.year}</Typography>
@@ -116,6 +117,7 @@ const NewEducationForm = ({ open, onClose, handleAdd }) => {
     const initialValues = {
         schoolName: "",
         course: "",
+        educationalLevel:"",
         from: {
             month: "June",
             year: "2016"
@@ -154,6 +156,22 @@ const NewEducationForm = ({ open, onClose, handleAdd }) => {
         <Dialog open={open} onClose={onClose} maxWidth='md' fullWidth component="form" onSubmit={handleSubmit}>
             <DialogTitle>Add Education</DialogTitle>
             <DialogContent>
+
+                <FormControl fullWidth sx={{marginTop:2}}>
+                    <InputLabel id="educationalLevel">Educational Level</InputLabel>
+                    <Select
+                    id="educationalLevel"
+                    value={values.educationalLevel}
+                    onChange={(e) => setFieldValue("educationalLevel", e.target.value)}
+                    >
+                    <MenuItem value={'Elementary'}>Elementary</MenuItem>
+                    <MenuItem value={'Junior High School'}>Junior High School</MenuItem>
+                    <MenuItem value={'Senior High School'}>Senior High School</MenuItem>
+                    <MenuItem value={'College'}>College</MenuItem>
+                    <MenuItem value={'Graduate Studies'}>Graduate Studies</MenuItem>
+                    </Select>
+                </FormControl>
+
                 <TextField required style={{ marginTop: 20 }} fullWidth size="small" label="School" placeholder='School' value={values.schoolName} name="schoolName" onChange={handleChange}
                     error={Boolean(errors.schoolName || touched.schoolName)}
                     helperText={errors.schoolName}
