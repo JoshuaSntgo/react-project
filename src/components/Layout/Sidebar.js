@@ -4,6 +4,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import BadgeIcon from '@mui/icons-material/Badge';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import WorkIcon from '@mui/icons-material/Work';
+import PrintIcon from '@mui/icons-material/Print';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonIcon from '@mui/icons-material/Person';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -37,6 +38,11 @@ export const facultyMenu = [
         name: 'Trainings and Programs',
         icon: <WorkspacePremiumIcon />,
         link: '/Faculty/TNP'
+    },
+    {
+        name: 'Print Personal Data Sheet',
+        icon: <PrintIcon />,
+        link: '/Faculty/Pds'
     }
 ]
 export const adminMenu = [

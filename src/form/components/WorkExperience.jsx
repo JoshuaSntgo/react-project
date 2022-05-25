@@ -99,7 +99,7 @@ const WorkExperienceForm = ({ open, onClose, handleAdd }) => {
         monthlySalary: 0,
         salary: 0.00,
         statusOfAppointment: "",
-        govtService: true
+        govtService: ""
     }
     const { values, handleSubmit, errors, handleChange, touched, setFieldValue } = useFormik({
         initialValues,
@@ -216,8 +216,8 @@ const WorkExperienceForm = ({ open, onClose, handleAdd }) => {
                         aria-labelledby="demo-radio-buttons-group-label"
                         name="govtService"
                         style={{ marginTop: 12, width: '50%' }} >.
-                        <FormControlLabel name="govtService" value="Yes" control={<Radio onChange={(e) => setFieldValue("govtService", e.target.checked ? true : false)} />} label="Yes" />
-                        <FormControlLabel name="govtService" value="No" control={<Radio onChange={(e) => setFieldValue("govtService", e.target.checked ? false : true)} />} label="No" />
+                        <FormControlLabel name="govtService" value="Yes" control={<Radio onChange={(e) => setFieldValue("govtService", e.target.checked ? "Yes" : "No")} />} label="Yes" />
+                        <FormControlLabel name="govtService" value="No" control={<Radio onChange={(e) => setFieldValue("govtService", e.target.checked ? "No" : "Yes")} />} label="No" />
                     </RadioGroup>
                 </Box>
 

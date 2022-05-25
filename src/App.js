@@ -19,6 +19,7 @@ import Fpersonalinfo from './Faculty/PersonalInfo';
 import Feducational from './Faculty/Educ';
 import FCSE from './Faculty/CSE';
 import FWorkExp from './Faculty/WorkExp';
+import Epds from './Faculty/Pds';
 
 const theme = createTheme({
   typography: {
@@ -64,6 +65,8 @@ function App() {
               {FWorkExp} />
             <Route path='/Faculty/TNP' exact component=
               {FTNP} />
+            <Route path='/Faculty/Pds' exact component=
+              {Epds} />
             <UserRoute path='/formsnew' exact component=
               {PersonalDataSheet} />
           </Switch>
