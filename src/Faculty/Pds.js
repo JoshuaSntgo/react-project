@@ -321,7 +321,7 @@ function Pds(props) {
 
                 <ReactHTMLTableToExcel
                     id="test-table-xls-button"
-                    className="btn"
+                    className="btn-excel"
                     table="table-to-xls"
                     filename="PDS"
                     sheet="tablexls"
