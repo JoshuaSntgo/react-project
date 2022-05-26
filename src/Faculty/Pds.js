@@ -323,7 +323,7 @@ function Pds(props) {
                     id="test-table-xls-button"
                     className="btn-excel"
                     table="table-to-xls"
-                    filename="PDS"
+                    filename={user.userInfo.personalInformation.lastName + "_" + user.userInfo.personalInformation.firstName + "_" + "PDS"}
                     sheet="tablexls"
                     buttonText="EXPORT TO EXCEL" />
             </Box>
