@@ -20,6 +20,7 @@ import Feducational from './Faculty/Educ';
 import FCSE from './Faculty/CSE';
 import FWorkExp from './Faculty/WorkExp';
 import Epds from './Faculty/Pds';
+import EDITPI from './Faculty/EditPI';
 
 const theme = createTheme({
   typography: {
@@ -67,6 +68,8 @@ function App() {
               {FTNP} />
             <Route path='/Faculty/Pds' exact component=
               {Epds} />
+            <Route path='/Faculty/EditPi' exact component=
+              {EDITPI} />
             <UserRoute path='/formsnew' exact component=
               {PersonalDataSheet} />
           </Switch>
