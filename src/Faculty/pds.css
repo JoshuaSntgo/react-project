@@ -62,3 +62,19 @@
     vertical-align: top;
     text-align: left;
 }
+
+.btn {
+    background-color: #2e7d32;
+    border: none;
+    color: white;
+    padding-bottom: 13px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 16px;
+    margin: 15px 10px;
+    width: 180px;
+    cursor: pointer;
+    border-radius: 4px;
+}

@@ -8,6 +8,7 @@ import { fetchFromStorage } from '../utilities/Storage';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import './pds.css';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 function Pds(props) {
 
@@ -53,7 +54,7 @@ function Pds(props) {
             <Sidebar></Sidebar>
             <Box sx={{ marginTop: 1 }} component="form">
                 <div id="capture">
-                    <table className="tg">
+                    <table className="tg" id="table-to-xls">
                         <thead>
                             <tr>
                                 <th className="tg-c3ow" colspan="7"><b>PERSONAL DATA SHEET</b></th>
@@ -97,7 +98,7 @@ function Pds(props) {
                                 <td className="tg-0pky"><b>CIVIL STATUS</b></td>
                                 <td className="tg-0pky" colspan="4">{user.userInfo.personalInformation.civilStatus}</td>
                                 <td className="tg-0pky"><b>RESIDENTIAL ADDRESS</b></td>
-                                <td className="tg-0pky">
+                                <td className="tg-0pky" id="table-to-xls">
                                     <tr>
                                         <td class="tg-0pky">{user.userInfo.personalInformation.address.house_no}</td>
                                         <td class="tg-0pky">{user.userInfo.personalInformation.address.street}</td>
@@ -142,7 +143,7 @@ function Pds(props) {
                                 <td class="tg-0pky"><b>HEIGHT</b></td>
                                 <td class="tg-0pky" colspan="4">{user.userInfo.personalInformation.height}</td>
                                 <td class="tg-0pky" rowspan="6"><b>PERMANENT ADDRESS</b></td>
-                                <td class="tg-0pky" rowspan="6">
+                                <td class="tg-0pky" rowspan="6" id="table-to-xls">
                                     <tr>
                                         <td class="tg-0pky">{user.userInfo.personalInformation.address2.house_no2}</td>
                                         <td class="tg-0pky">{user.userInfo.personalInformation.address2.street2}</td>
@@ -316,8 +317,15 @@ function Pds(props) {
                         </tbody>
                     </table>
                 </div>
-                <Button variant="outlined" color="warning" onClick={exportPdf} sx={{ marginTop: 5 }}>Print to PDF</Button>
-                <Button variant="contained" color="success" sx={{ marginTop: 5, marginLeft: 2 }}>Export to Excel</Button>
+                <Button variant="outlined" color="warning" onClick={exportPdf} sx={{ height: "45px" }}>Print to PDF</Button>
+
+                <ReactHTMLTableToExcel
+                    id="test-table-xls-button"
+                    className="btn"
+                    table="table-to-xls"
+                    filename="PDS"
+                    sheet="tablexls"
+                    buttonText="EXPORT TO EXCEL" />
             </Box>
         </Card >
     )
