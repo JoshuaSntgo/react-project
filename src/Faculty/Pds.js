@@ -162,7 +162,7 @@ function Pds(props) {
                                     </tr>
                                     <tr>
                                         <td class="tg-0pky">{user.userInfo.personalInformation.address2.city2}</td>
-                                        <td class="tg-0pky">{user.userInfo.personalInformation.address.province2}</td>
+                                        <td class="tg-0pky">{user.userInfo.personalInformation.address2.province2}</td>
                                     </tr>
                                     <tr>
                                         <td class="tg-0pky"><b>City/Municipality</b></td>
