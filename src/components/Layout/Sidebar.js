@@ -7,6 +7,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import PrintIcon from '@mui/icons-material/Print';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonIcon from '@mui/icons-material/Person';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Avatar, Divider, Drawer, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import { Box } from '@mui/system';
@@ -52,9 +53,14 @@ export const adminMenu = [
         link: '/admin/dashboard'
     },
     {
-        name: 'User Management',
+        name: 'Faculty Management',
         icon: <GroupsIcon />,
         link: '/admin/usermanagement'
+    },
+    {
+        name: 'Faculty PDS',
+        icon: <PeopleAltIcon />,
+        link: '/admin/FacultyPDS'
     },
 ]
 

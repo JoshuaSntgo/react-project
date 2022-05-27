@@ -31,20 +31,11 @@ function Pds(props) {
         });
 
     }
+
     useEffect(() => {
         getUser()
     }, [getUser])
     /* End Code
-                    <TableContainer component={Paper}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className="tg-c3ow" colspan="4">PERSONAL DATA SHEET</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-
-                    </TableBody>
-                </TableContainer>
     
     */
 

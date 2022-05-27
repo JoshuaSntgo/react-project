@@ -10,6 +10,7 @@ import SignUp from './Register/Form';
 import FTNP from './Faculty/TNP';
 import Table from './components/Table';
 import UserManagement from './components/UserManagement';
+import FacultyPDS from './components/FacultyPDS'
 import PersonalDataSheet from './form';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux'
@@ -54,6 +55,8 @@ function App() {
               {Table} />
             <AdminRoute path='/admin/usermanagement' exact component=
               {UserManagement} />
+            <AdminRoute path='/admin/FacultyPDS' exact component=
+              {FacultyPDS} />
             <Route path='/Sign-Up' exact component=
               {SignUp} />
             <Route path='/Faculty/PersonalInfo' exact component=

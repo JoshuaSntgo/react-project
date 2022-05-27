@@ -9,7 +9,6 @@ import axiosInstance from '../axios/Index';
 import { AgGridReact, AgGridColumn } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-community/dist/styles/ag-grid.css';
-
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 
@@ -27,7 +26,7 @@ const UserManagement = () => {
         getUsers()
     }, [getUsers])
     const [pageSize, setPageSize] = React.useState(10);
-    
+
     return (
 
         <Box sx={{ display: 'flex' }}>
@@ -127,7 +126,7 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
                     />
                 </Stack>
             </Grid>
-            <Grid xs={12} sx={{ p: 2, marginTop:-2}}>
+            <Grid xs={12} sx={{ p: 2, marginTop: -2 }}>
                 <TextField
                     variant="outlined"
                     size="small"
@@ -142,10 +141,10 @@ const UserDialog = ({ open, onClose, user, refresh }) => {
             </Grid>
 
             <DialogActions>
-                <Button variant='outlined' onClick={onClose} sx={{marginTop:1, marginBottom:1}}>Close</Button>
-                {user.isConfirmed 
-                    ? <Button variant="contained" color="warning" onClick={handleDisapprove} sx={{marginTop:1, marginBottom:1}}>Remove Access</Button>
-                    : <Button variant="contained" color="warning" disabled={user.isConfirmed} onClick={handleApprove} sx={{marginTop:1, marginBottom:1}}>Approve</Button>
+                <Button variant='outlined' onClick={onClose} sx={{ marginTop: 1, marginBottom: 1 }}>Close</Button>
+                {user.isConfirmed
+                    ? <Button variant="contained" color="warning" onClick={handleDisapprove} sx={{ marginTop: 1, marginBottom: 1 }}>Remove Access</Button>
+                    : <Button variant="contained" color="warning" disabled={user.isConfirmed} onClick={handleApprove} sx={{ marginTop: 1, marginBottom: 1 }}>Approve</Button>
 
                 }
             </DialogActions>
