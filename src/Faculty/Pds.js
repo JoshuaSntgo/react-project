@@ -308,7 +308,7 @@ function Pds(props) {
                         </tbody>
                     </table>
                 </div>
-                <Button variant="outlined" color="warning" onClick={exportPdf} sx={{ height: "45px" }}>Print to PDF</Button>
+                <Button variant="contained" color="warning" onClick={exportPdf} sx={{ marginTop: "-3px", height: "44px" }}>Print to PDF</Button>
 
                 <ReactHTMLTableToExcel
                     id="test-table-xls-button"

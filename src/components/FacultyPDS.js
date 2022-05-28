@@ -98,7 +98,7 @@ const UserDialog = ({ open, onClose, user, refresh, selectedUsers }) => {
     return (
 
         <Dialog open={open} onClose={onClose} maxWidth="large" fullWidth>
-            <DialogTitle>Faculty Personal Data Sheet</DialogTitle>
+            <DialogTitle>{user.userInfo.personalInformation.firstName}, Personal Data Sheet</DialogTitle>
             <div id="capture1">
                 <table className="tg" id="table-to-xls">
                     <thead>
